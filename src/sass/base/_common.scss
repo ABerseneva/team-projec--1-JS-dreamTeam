@@ -1,3 +1,12 @@
+@import '~node_modules/modern-normalize/modern-normalize.css';
+
+body {
+    font-family: Poppins, sans-serif;
+    font-weight: 600;
+    background: var(--white-color);
+    margin: 0;
+}
+
 .visually-hidden {
     position: absolute;
     white-space: nowrap;
@@ -10,13 +19,17 @@
     clip-path: inset(50%);
     margin: -1px;
 }
-.link:hover,
-.link:focus {
-    color: var(--color-text-action);
-}
+// .link:hover,
+// .link:focus {
+//     color: var(--color-text-action);
+// }
 
 .no-scroll {
     overflow: hidden;
 }
 
-@import '~node_modules/modern-normalize/modern-normalize.css';
+.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}

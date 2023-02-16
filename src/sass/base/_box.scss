@@ -12,22 +12,22 @@
         width: 768px;
     }
 
-    @include desctop {
+    @include desktop {
         width: 1200px;
     }
 }
 
-.section {
-        padding-top: 60px;
-        padding-bottom: 60px;
+// .section {
+//         padding-top: 60px;
+//         padding-bottom: 60px;
 
-    @include tablet {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
+//     @include tablet {
+//         padding-top: 60px;
+//         padding-bottom: 60px;
+//     }
 
-    @include desctop {
-        padding-top: 94px;
-        padding-bottom: 94px;
-    }
-}
+//     @include desktop {
+//         padding-top: 94px;
+//         padding-bottom: 94px;
+//     }
+// }
