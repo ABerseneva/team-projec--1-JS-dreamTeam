@@ -23,6 +23,7 @@ async function fetchRandomCoctails() {
 console.log(randomArray);
 
 async function renderRandomCocktails() {
+  paginator.classList.add('visually-hidden');
   const randomList = await fetchRandomCoctails();
   box.innerHTML = '';
   buildMarkup(randomList);
@@ -46,6 +47,7 @@ async function fetchCocktail(queryToFetch) {
 
 // async function buildGallery() {
 //   const cocktails = await fetchCocktail('a');
+
 //   perPage = pagesMediaCheck();
 
 //   renderCocktails(cocktails, perPage, currentPage);
@@ -100,14 +102,14 @@ function pagesMediaCheck() {
 
 function buildMarkup(data) {
   const markup = data.map(({ strDrinkThumb, strDrink, idDrink }) => {
-    return `<li class='cocktail__item'>
+    return `<li class='cocktail__item data-id='${idDrink}''>
       <div class='cocktail__card'>
       <img class='cocktail__image' src='${strDrinkThumb}' alt='cocktail'/>
       <div class='cocktail__thumb'>
       <h3 class='cocktail__title'>${strDrink}</h3>
       <div class='cocktail__btn--box'>
-      <button class='learnmore__btn' type='button'>Learn More</button>
-      <button class='add__btn' data-id='${idDrink}' type='button'>Add to
+      <button class='learnmore__btn' type='button' data-learn>Learn More</button>
+      <button class='add__btn' type='button' data-add>Add to
      <svg class="icon-hert" width="19" height="17">
             <use href="./symbol-defs.a8b2e413.svg#icon-heart-transparent"></use>
     </svg>
@@ -129,3 +131,50 @@ function renderCocktails(cocktailList, perPage, page) {
   const paginatedData = cocktailList.slice(begin, end);
   buildMarkup(paginatedData);
 }
+
+function arrowBtnControl(number) {
+  const backward = document.querySelector('.backward');
+  const forward = document.querySelector('.forward');
+  backward.addEventListener('click', () => number--);
+  forward.addEventListener('click', () => number++);
+
+  return number;
+}
+
+// `<picture>
+//   <source
+//     media="(min-width: 1200px)"
+//     srcset="
+//                   ./images/hero-error/people.png    1x,
+//                   ./images/hero-error/people-2x.png 2x
+//                 "
+//   />
+//   <source
+//     media="(min-width: 768px)"
+//     srcset="./images/hero-error/people-tab.png    1x,
+//             ./images/hero-error/people-tab-2x.png 2x"
+//   />
+//   <source
+//     media="(max-width: 767px)"
+//     srcset="./images/hero-error/people-mob.png    1x,
+//             ./images/hero-error/people-mob-2x.png 2x"
+//   />
+//   <img
+//     class="gallery__photo"
+//     src="./images/hero-error/people.png    1x,
+//                   ./images/hero-error/people-2x.png 2x"
+//     alt="icecream"
+//     width="345"
+//     height="382"
+//   />
+// </picture>;`;
+
+// const sectionGallery = document.querySelector('.cocktail__section');
+// const noMatch = `<img
+//     class="gallery__photo"
+//     src="/images/hero-error/people.png"
+//     alt="icecream"
+//     width="345"
+//     height="382"
+//    />`;
+// sectionGallery.innerHTML = noMatch;

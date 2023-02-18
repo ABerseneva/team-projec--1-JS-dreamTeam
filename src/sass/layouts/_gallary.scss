@@ -204,6 +204,9 @@
 }
 
 .paginator {
+  display: flex;
+  justify-content: space-evenly;
+
   margin-top: 24px;
 
   @include tablet {
@@ -213,6 +216,7 @@
 
 .pagination__list {
   display: flex;
+
   gap: 8;
   font-family: 'Montserrat';
 
@@ -258,4 +262,26 @@
 
 .icon-hert {
   background-image: url('../images/heart.svg');
+}
+
+.arrow__back,
+.arrow__fore {
+  fill: var(--orange-color);
+}
+
+.backward,
+.forward {
+  width: 60px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  @include tablet {
+    border: 1px solid #eaebea;
+  }
+}
+
+.move__btn-disabled {
+  fill: #eaebea;
 }
