@@ -9,3 +9,4 @@ import './js/pagination';
 import './js/render-gallery';
 import './js/color-switch';
 import './js/fetch';
+import './js/local-storage-ingredients';
