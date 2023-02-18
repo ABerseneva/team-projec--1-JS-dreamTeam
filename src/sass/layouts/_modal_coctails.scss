@@ -1,3 +1,8 @@
+.modal-cockt__close-icon {
+  fill: var(--black-color);
+}
+
+
 .modal-cockt__close-btn {
   position: absolute;
   width: 30px;
@@ -12,25 +17,25 @@
 
   box-sizing: border-box;
 
-  background-color: #ffffff;
+  background-color: var(--white-color);
   border: none;
   border-radius: 50%;
-  fill: #000000;
+  fill: var(--black-color);
 
   &:hover,
   &:focus {
-    background-color: rgba(224, 132, 78, 0.1);
+    background-color: var(--accent-color);
     transition-property: background-color;
     transition: 250ms;
   }
 }
 
-.modal-cockt__close-icon {
-  fill: #000;
-}
+
 
 .modal-cockt__card {
   position: relative;
+
+  background-color: var(--white-color);
 
   padding: 40px 20px;
   width: 320px;
@@ -85,12 +90,12 @@
 
 .modal-cockt__img-tumb {
   grid-area: imgtumb;
+  display: flex;
+  justify-content:center;
+  align-items:center;
   width: 280px;
   overflow: hidden;
 
-  //   & img {
-  //     // width: 100%;
-  //   }
 }
 
 .modal-cockt__ingedients-box {
@@ -124,7 +129,6 @@
   list-style-type: '✶ ';
 }
 
-// .modal-cockt__ingred {}
 
 .modal-cockt__instr-title {
   padding-bottom: 20px;
