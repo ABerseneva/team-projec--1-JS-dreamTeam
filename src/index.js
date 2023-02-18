@@ -7,3 +7,5 @@ import './js/modal-coctails';
 import './js/modal-ingridients';
 import './js/pagination';
 import './js/render-gallery';
+import './js/color-switch';
+import './js/fetch';
