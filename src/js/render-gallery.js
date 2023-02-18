@@ -98,7 +98,7 @@ function pagesMediaCheck() {
 
 function buildMarkup(data) {
   const markup = data.map(({ strDrinkThumb, strDrink, idDrink }) => {
-    return `<li class='cocktail__item data-id='${idDrink}''>
+    return `<li class='cocktail__item' data-id='${idDrink}''>
       <div class='cocktail__card'>
       <img class='cocktail__image' src='${strDrinkThumb}' alt='cocktail'/>
       <div class='cocktail__thumb'>

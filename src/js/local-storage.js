@@ -1,6 +1,6 @@
-const wrapper = document.querySelector('.favorit-coct__wrapper');
+// const wrapper = document.querySelector('.favorit-coct__wrapper');
 const addBtn = document.querySelectorAll('.add__btn');
-
+console.log(addBtn);
 const list = document.querySelector('.favorit-coct__list');
 
 const coctailse = [];
@@ -14,22 +14,24 @@ console.log(coctailList);
 
 if (localStorage.getItem('coctailse') === '[]') {
   console.log('helllo');
-  renderStartMarkup();
-} else {
-  wrapper.innerHTML = '';
-  // list.innerHTML = '';
-  renderCocktailsCard(coctailList);
+  // renderStartMarkup();
 }
+// else {
+//   wrapper.innerHTML = '';
+//   // list.innerHTML = '';
+//   renderCocktailsCard(coctailList);
+// }
 
-function renderStartMarkup() {
-  const startMarkup = `<p>You haven't added any favorite cocktails yet</p>`;
-  wrapper.insertAdjacentHTML('beforebegin', startMarkup);
-}
+// function renderStartMarkup() {
+//   const startMarkup = `<p>You haven't added any favorite cocktails yet</p>`;
+//   wrapper.insertAdjacentHTML('beforebegin', startMarkup);
+// }
 
 document.addEventListener('click', event => {
-  const card = event.target.closest('.cocktail__card');
+  const card = event.target.closest('li');
+  console.log(card);
   const coctId = card.dataset.id;
-
+  console.log(coctId);
   if (event.target.dataset.add != undefined) {
     const coctImg = card.querySelector('.cocktail__image').src;
     const coctName = card.querySelector('.cocktail__title').textContent;
