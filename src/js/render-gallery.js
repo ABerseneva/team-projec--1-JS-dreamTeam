@@ -1,30 +1,20 @@
 import axios from 'axios';
+import { fetchRandomCoctails } from './fetch';
+
+let randomList = [];
 
 const box = document.querySelector('.cocktail__list');
 const paginator = document.querySelector('.paginator');
 const paginatorList = document.querySelector('.pagination__list');
+const sectionGallery = document.querySelector('.cocktail__section');
 
 let currentPage = 1;
 let perPage = 0;
-let randomArray = [];
-
-async function fetchRandomCoctails() {
-  perPage = pagesMediaCheck();
-
-  for (let i = 0; i < perPage; i++) {
-    const randomCoctail = await axios.get(
-      'https://www.thecocktaildb.com/api/json/v1/1/random.php'
-    );
-
-    randomArray.push(...randomCoctail.data.drinks);
-  }
-  return await randomArray;
-}
-console.log(randomArray);
+perPage = pagesMediaCheck();
 
 async function renderRandomCocktails() {
   paginator.classList.add('visually-hidden');
-  const randomList = await fetchRandomCoctails();
+  randomList = await fetchRandomCoctails(perPage);
   box.innerHTML = '';
   buildMarkup(randomList);
 }
@@ -47,6 +37,12 @@ async function fetchCocktail(queryToFetch) {
 
 // async function buildGallery() {
 //   const cocktails = await fetchCocktail('a');
+
+//   if (cocktails === null) {
+//     const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>`;
+//     sectionGallery.innerHTML = noMatch;
+//     return;
+//   }
 
 //   perPage = pagesMediaCheck();
 

@@ -178,9 +178,6 @@
   }
 }
 
-.add__btn-heart {
-}
-
 .cocktail__title {
   font-family: 'Roboto';
   font-weight: 900;
@@ -200,6 +197,29 @@
     font-size: 32px;
     line-height: 1.19;
     margin-bottom: 28px;
+  }
+}
+
+.noresult__text {
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.91;
+  color: var(--black-color);
+
+  text-align: center;
+
+  @include tablet {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.31;
+  }
+
+  @include desktop {
+    font-family: 'Poppins';
+    font-size: 48px;
+    line-height: 1.5;
   }
 }
 
