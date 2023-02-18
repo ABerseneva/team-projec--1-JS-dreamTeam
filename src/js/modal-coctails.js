@@ -1,4 +1,29 @@
-import axios from 'axios';
+// import axios from 'axios';
+
+// ========================================
+
+(() => {
+  const refs = {
+    openModalBtn: document.querySelector('[data-modal-cockt-open]'),
+    closeModalBtn: document.querySelector('[data-modal-cockt-close]'),
+    modal: document.querySelector('[data-modal-cockt]'),
+    body: document.querySelector('body'),
+  };
+
+  //   for (item of refs.openModalList) {
+  //     item.addEventListener('click', toggleModal);
+  //   }
+  refs.openModalBtn.addEventListener('click', toggleModal);
+  refs.closeModalBtn.addEventListener('click', toggleModal);
+
+  function toggleModal() {
+    refs.modal.classList.toggle('is-hidden');
+    refs.body.classList.toggle('no-scroll');
+    console.log(refs.modal);
+  }
+})();
+
+// ===========================================
 
 // const box = document.querySelector('.cocktail__list');
 // const paginator = document.querySelector('.paginator');

@@ -31,9 +31,42 @@
 }
 
 
+.modal-cockt.is-hidden {
+scale: 0;
+}
+
+.modal-cockt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  transition-duration: 250ms;
+  transition-property: scale;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 20;
+  
+}
 
 .modal-cockt__card {
-  position: relative;
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+  background-color: var(--white-color);
+
+  transition-property: scale;
+ 
+}
+
+
+.modal-cockt__card {
 
   background-color: var(--white-color);
 
