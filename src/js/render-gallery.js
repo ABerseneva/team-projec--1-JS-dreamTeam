@@ -1,16 +1,36 @@
 import axios from 'axios';
-import { fetchRandomCoctails } from './fetch';
-
-let randomList = [];
+import { fetchRandomCoctails, fetchCocktailByName } from './fetch';
+import { markupingBtn } from './add-from-gallery';
 
 const box = document.querySelector('.cocktail__list');
 const paginator = document.querySelector('.paginator');
 const paginatorList = document.querySelector('.pagination__list');
 const sectionGallery = document.querySelector('.cocktail__section');
+const form = document.querySelector('.header-search-icon');
 
+form.addEventListener('submit', onSearch);
+
+let randomList = [];
 let currentPage = 1;
 let perPage = 0;
 perPage = pagesMediaCheck();
+
+async function onSearch(e) {
+  e.preventDefault();
+  const searchValue = e.target.elements.searchQuery.value;
+
+  paginator.classList.add('visually-hidden');
+
+  box.innerHTML = '';
+  const requestedData = await fetchCocktailByName(searchValue);
+  renderCocktails(requestedData, perPage, currentPage);
+  form.reset();
+
+  // buildMarkup(requestedData);
+
+  // renderCocktails(requestedData, perPage, currentPage);
+  // return searchResult;
+}
 
 async function renderRandomCocktails() {
   paginator.classList.add('visually-hidden');
@@ -20,67 +40,53 @@ async function renderRandomCocktails() {
 }
 renderRandomCocktails();
 
-async function fetchCocktail(queryToFetch) {
-  if (queryToFetch.lentgh === 1) {
-    const result = await axios.get(
-      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${queryToFetch}`
-    );
-    const cocktails = await result.data.drinks;
-    return cocktails;
+async function buildGallery(searchValue) {
+  const cocktails = await fetchCocktailByName(searchValue);
+  // console.log(cocktails);
+  if (cocktails === null) {
+    const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>
+                     <div class='noresult__box'></div>`;
+    sectionGallery.innerHTML = noMatch;
+    return;
   }
-  const result = await axios.get(
-    `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${queryToFetch}`
-  );
-  const cocktails = await result.data.drinks;
-  return cocktails;
+
+  perPage = pagesMediaCheck();
+
+  renderCocktails(cocktails, perPage, currentPage);
+
+  function displayPagination(cocktailList, perPage) {
+    const totalPages = Math.ceil(cocktailList.length / perPage);
+    for (let i = 0; i < totalPages; i++) {
+      const cocktailItem = displayPaginationBtn(i + 1);
+      paginatorList.append(cocktailItem);
+    }
+  }
+
+  function displayPaginationBtn(number) {
+    const cocktailItem = document.createElement('li');
+    cocktailItem.classList.add('pagination__item');
+    cocktailItem.textContent = number;
+
+    if (currentPage === number) {
+      cocktailItem.classList.add('pagination__item--active');
+    }
+
+    cocktailItem.addEventListener('click', () => {
+      currentPage = number;
+      renderCocktails(cocktails, perPage, currentPage);
+
+      let currentActive = document.querySelector('li.pagination__item--active');
+      currentActive.classList.remove('pagination__item--active');
+
+      cocktailItem.classList.add('pagination__item--active');
+    });
+    return cocktailItem;
+  }
+
+  displayPagination(cocktails, perPage);
 }
 
-// async function buildGallery() {
-//   const cocktails = await fetchCocktail('a');
-
-//   if (cocktails === null) {
-//     const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>`;
-//     sectionGallery.innerHTML = noMatch;
-//     return;
-//   }
-
-//   perPage = pagesMediaCheck();
-
-//   renderCocktails(cocktails, perPage, currentPage);
-
-//   function displayPagination(cocktailList, perPage) {
-//     const totalPages = Math.ceil(cocktailList.length / perPage);
-//     for (let i = 0; i < totalPages; i++) {
-//       const cocktailItem = displayPaginationBtn(i + 1);
-//       paginatorList.append(cocktailItem);
-//     }
-//   }
-
-//   function displayPaginationBtn(number) {
-//     const cocktailItem = document.createElement('li');
-//     cocktailItem.classList.add('pagination__item');
-//     cocktailItem.textContent = number;
-
-//     if (currentPage === number) {
-//       cocktailItem.classList.add('pagination__item--active');
-//     }
-
-//     cocktailItem.addEventListener('click', () => {
-//       currentPage = number;
-//       renderCocktails(cocktails, perPage, currentPage);
-
-//       let currentActive = document.querySelector('li.pagination__item--active');
-//       currentActive.classList.remove('pagination__item--active');
-
-//       cocktailItem.classList.add('pagination__item--active');
-//     });
-//     return cocktailItem;
-//   }
-
-//   displayPagination(cocktails, perPage);
-// }
-
-// buildGallery();
+// buildGallery('a');
 
 function pagesMediaCheck() {
   if (window.matchMedia('(min-width: 320px)').matches) {
@@ -97,35 +103,45 @@ function pagesMediaCheck() {
 }
 
 function buildMarkup(data) {
+  if (data === null) {
+    const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>
+                     <div class='noresult__box'></div>`;
+    sectionGallery.innerHTML = noMatch;
+    return;
+  }
   const markup = data.map(({ strDrinkThumb, strDrink, idDrink }) => {
-    return `<li class='cocktail__item' data-id='${idDrink}''>
-      <div class='cocktail__card'>
-      <img class='cocktail__image' src='${strDrinkThumb}' alt='cocktail'/>
-      <div class='cocktail__thumb'>
-      <h3 class='cocktail__title'>${strDrink}</h3>
+    return `<li class='cocktail__item item' data-id='${idDrink}''>
+      <img class='cocktail__image image' src='${strDrinkThumb}' alt='cocktail'/>
+      <h3 class='cocktail__title name'>${strDrink}</h3>
       <div class='cocktail__btn--box'>
-      <button class='learnmore__btn' type='button' data-learn>Learn More</button>
+      <button class='learnmore__btn' type='button' data-modal-cockt-open>Learn More</button>
       <button class='add__btn' type='button' data-add>Add to
      <svg class="icon-hert" width="19" height="17">
             <use href="./symbol-defs.a8b2e413.svg#icon-heart-transparent"></use>
     </svg>
      </button>
       </div>
-      </div>
-      </div>
       </li>`;
   });
   box.insertAdjacentHTML('beforeend', markup.join(''));
+  markupingBtn();
 }
 
 function renderCocktails(cocktailList, perPage, page) {
   page--;
   box.innerHTML = '';
 
+  if (cocktailList === null) {
+    const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>
+                     <div class='noresult__box'></div>`;
+    sectionGallery.innerHTML = noMatch;
+    return;
+  }
+
   const begin = perPage * page;
   const end = begin + perPage;
   const paginatedData = cocktailList.slice(begin, end);
-  buildMarkup(paginatedData);
+  return buildMarkup(paginatedData);
 }
 
 function arrowBtnControl(number) {
@@ -136,41 +152,3 @@ function arrowBtnControl(number) {
 
   return number;
 }
-
-// `<picture>
-//   <source
-//     media="(min-width: 1200px)"
-//     srcset="
-//                   ./images/hero-error/people.png    1x,
-//                   ./images/hero-error/people-2x.png 2x
-//                 "
-//   />
-//   <source
-//     media="(min-width: 768px)"
-//     srcset="./images/hero-error/people-tab.png    1x,
-//             ./images/hero-error/people-tab-2x.png 2x"
-//   />
-//   <source
-//     media="(max-width: 767px)"
-//     srcset="./images/hero-error/people-mob.png    1x,
-//             ./images/hero-error/people-mob-2x.png 2x"
-//   />
-//   <img
-//     class="gallery__photo"
-//     src="./images/hero-error/people.png    1x,
-//                   ./images/hero-error/people-2x.png 2x"
-//     alt="icecream"
-//     width="345"
-//     height="382"
-//   />
-// </picture>;`;
-
-// const sectionGallery = document.querySelector('.cocktail__section');
-// const noMatch = `<img
-//     class="gallery__photo"
-//     src="/images/hero-error/people.png"
-//     alt="icecream"
-//     width="345"
-//     height="382"
-//    />`;
-// sectionGallery.innerHTML = noMatch;

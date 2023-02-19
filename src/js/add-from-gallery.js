@@ -70,7 +70,7 @@ function changeToRemove(event) {
   }
 }
 
-function markupingBtn() {
+export function markupingBtn() {
   const btns = document.querySelectorAll('[data-add]');
   console.log(btns);
   btns.forEach(btn => {
