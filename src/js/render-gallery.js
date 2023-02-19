@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { fetchRandomCoctails, fetchCocktailByName } from './fetch';
+import { markupingBtn } from './add-from-gallery';
 
 const box = document.querySelector('.cocktail__list');
 const paginator = document.querySelector('.paginator');
 const paginatorList = document.querySelector('.pagination__list');
 const sectionGallery = document.querySelector('.cocktail__section');
-const input = document.querySelector('.header-search-input');
+const form = document.querySelector('.header-search-icon');
 
-input.addEventListener('input', onSearch);
+form.addEventListener('submit', onSearch);
 
 let randomList = [];
 let currentPage = 1;
@@ -16,13 +17,14 @@ perPage = pagesMediaCheck();
 
 async function onSearch(e) {
   e.preventDefault();
-  const searchValue = e.target.value;
+  const searchValue = e.target.elements.searchQuery.value;
 
   paginator.classList.add('visually-hidden');
 
   box.innerHTML = '';
   const requestedData = await fetchCocktailByName(searchValue);
   renderCocktails(requestedData, perPage, currentPage);
+  form.reset();
 
   // buildMarkup(requestedData);
 
@@ -34,7 +36,6 @@ async function renderRandomCocktails() {
   paginator.classList.add('visually-hidden');
   randomList = await fetchRandomCoctails(perPage);
   box.innerHTML = '';
-  console.log(randomList);
   buildMarkup(randomList);
 }
 renderRandomCocktails();
@@ -123,30 +124,8 @@ function buildMarkup(data) {
       </li>`;
   });
   box.insertAdjacentHTML('beforeend', markup.join(''));
-  // markupingBtn();
+  markupingBtn();
 }
-
-// function markupingBtn() {
-//   const btns = document.querySelectorAll('[data-add]');
-//   console.log(btns);
-//   btns.forEach(btn => {
-//     const card = btn.closest('.item');
-//     const coctId = card.dataset.id;
-//     const coctailList = JSON.parse(localStorage.getItem('coctailse'));
-//     const numbers = coctailList.map(({ id }) => id);
-//     if (numbers.some(value => value === coctId)) {
-//       const tekst = btn.textContent === 'Add to favorite';
-//       if (tekst) {
-//         btn.textContent = 'Remove from favorite';
-//       } else {
-//         btn.innerHTML = `Remove
-//      <svg class="icon-hert" width="19" height="17">
-//             <use href="./symbol-defs.a8b2e413.svg#icon-heart-transparent"></use>
-//     </svg>`;
-//       }
-//     }
-//   });
-// }
 
 function renderCocktails(cocktailList, perPage, page) {
   page--;
