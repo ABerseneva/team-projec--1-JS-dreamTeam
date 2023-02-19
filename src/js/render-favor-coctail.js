@@ -47,8 +47,8 @@ function buildMarkup(data) {
       <div class='cocktail__btn--box'>
       <button class='learnmore__btn' type='button' data-modal-cockt-open>Learn More</button>
       <button class='add__btn' type='button' data-add>Remove
-     <svg class="icon-hert" width="19" height="17">
-            <use href="./symbol-defs.a8b2e413.svg#icon-heart-transparent"></use>
+     <svg class="icon-hert-fill" width="19" height="17">
+            <use href="./symbol-defs.a8b2e413.svg#icon-heart-orange"></use>
     </svg>
      </button>
       </div>
