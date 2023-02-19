@@ -1,7 +1,12 @@
-<section class="header" id="header">
+<section class="header container" id="header">
   <div class="header-wrap">
-    <img class="logo" src="/src/images/Logo-COCKTAILS.png" alt="coctail logo" />
-
+    <a href="/src/index.html">
+      <img
+        class="logo"
+        src="/src/images/Logo-COCKTAILS.png"
+        alt="coctail logo"
+      />
+    </a>
     <nav class="header-nav">
       <ul class="header-nav-list">
         <li class="header-nav-item">
@@ -29,9 +34,20 @@
       </ul>
     </nav>
     <div class="header-search">
+<<<<<<< HEAD
       <span class="header-search-icon">
-        <input class="header-search-input" placeholder="Search"
+        <input class="header-search-input" type="submit" placeholder="Search"
       /></span>
+=======
+      <form class="header-search-icon">
+        <button type="submit">
+          <svg class="search__icon" width="24" height="24">
+            <use href="/src/images/header__icons.svg#icon-search"></use>
+          </svg>
+        </button>
+        <input class="header-search-input" placeholder="Search |" />
+      </form>
+>>>>>>> 70c9d30cddccef351e80d26a35bfbb54c87207f4
     </div>
 
     <div class="theme-switch-wrapper">

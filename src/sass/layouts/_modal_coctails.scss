@@ -31,15 +31,48 @@
 }
 
 
+.modal-cockt.is-hidden {
+scale: 0;
+}
+
+.modal-cockt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  transition-duration: 250ms;
+  transition-property: scale;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 20;
+  
+}
 
 .modal-cockt__card {
-  position: relative;
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+  background-color: var(--white-color);
+
+  transition-property: scale;
+ 
+}
+
+
+.modal-cockt__card {
 
   background-color: var(--white-color);
 
   padding: 40px 20px;
   width: 320px;
-  height: 960px;
+  
 
   gap: 20px;
 
@@ -57,11 +90,11 @@
 
   @include tablet {
     width: 820px;
-    height: 600px;
+    padding: 0px;
 
     display: grid;
 
-    grid-template-rows: 40px 280px 1fr 50px;
+    grid-template-rows: 80px 220px 1fr 80px;
     grid-template-columns: 280px 1fr;
 
     grid-template-areas:
@@ -73,11 +106,12 @@
 
   @include desktop {
     width: 820px;
-    height: 600px;
+    padding: 0px;
+   
 
     display: grid;
 
-    grid-template-rows: 40px 280px 1fr 50px;
+    grid-template-rows: 80px 220px 1fr 80px;
     grid-template-columns: 280px 1fr;
 
     grid-template-areas:
@@ -98,6 +132,10 @@
 
 }
 
+.modal-cockt__img {
+  height: 100%;
+}
+
 .modal-cockt__ingedients-box {
   grid-area: ingedientsbox;
 }
@@ -106,6 +144,12 @@
   grid-area: name;
 
   @include font(900, 32, 1.18, null);
+  @include tablet {
+    margin-top: 40px;
+  }
+  @include desktop {
+    margin-top: 40px;
+  }
 }
 
 .modal-cockt__per-list {
@@ -132,10 +176,17 @@
 
 .modal-cockt__instr-title {
   padding-bottom: 20px;
+
   font-weight: 600;
   font-size: 16px;
   line-height: 1.6;
   text-transform: uppercase;
+@include tablet {
+    padding-left: 30px;
+}
+@include desktop {
+  padding-left: 30px;
+}
 }
 
 .modal-cockt__post-title {
@@ -161,21 +212,34 @@
   line-height: 1.75;
 
   color: var(--gray-color);
+
+  @include tablet{
+    padding: 0 30px;
+  }
+  @include desktop {
+    padding: 0 30px;
+  }
+    
+        
 }
 
 .modal-cockt__box-button {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: start;
 
   grid-area: boxbutton;
 
   @include tablet {
     justify-content: end;
+    margin-bottom: 30px;
+    margin-right: 30px;
   }
 
   @include tablet {
     justify-content: end;
+        margin-bottom: 30px;
+          margin-right: 30px;
   }
 }
 
