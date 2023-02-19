@@ -4,7 +4,7 @@ import './js/hero-alphabet';
 // import './js/local-storage';
 import './js/add-from-gallery';
 import './js/mobile-menu';
-// import './js/modal-coctails';
+import './js/modal-coctails';
 import './js/modal-ingridients';
 import './js/pagination';
 import './js/render-gallery';
