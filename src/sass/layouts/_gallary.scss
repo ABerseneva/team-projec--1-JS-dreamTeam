@@ -1,0 +1,307 @@
+.cocktail__section {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  width: 100%;
+
+  @include tablet {
+    padding: 110px 18px 60px 18px;
+  }
+
+  @include desktop {
+    padding: 105px 0 60px 0;
+  }
+}
+
+.gallery__title {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.91;
+  color: var(--black-color);
+
+  text-align: center;
+
+  margin-bottom: 60px;
+
+  @include tablet {
+    font-family: 'Roboto';
+    font-weight: 900;
+    font-size: 28px;
+    line-height: 1.19;
+  }
+
+  @include desktop {
+    font-size: 32px;
+  }
+}
+
+.cocktail__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+
+  @include tablet {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+}
+
+.cocktail__item {
+  width: 280px;
+  margin: 0;
+
+  @include tablet {
+    @include calc(2, 32px);
+  }
+
+  @include desktop {
+    @include calc(3, 32px);
+  }
+}
+
+.cocktail__card {
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  height: 450px;
+
+  @include tablet {
+    height: auto;
+  }
+}
+
+.cocktail__image {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  @include tablet {
+    height: 395px;
+  }
+
+  @include desktop {
+    height: auto;
+  }
+}
+
+.cocktail__thumb {
+  padding-top: 48px;
+  padding-bottom: 24px;
+  text-align: center;
+
+  & button {
+    text-align: center;
+
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  @include tablet {
+    padding: 20px 0;
+  }
+
+  @include desktop {
+    padding-bottom: 28px;
+  }
+}
+
+.cocktail__btn--box {
+  display: flex;
+  gap: 17px;
+  justify-content: center;
+
+  @include tablet {
+    gap: 12px;
+  }
+
+  @include desktop {
+    gap: 16px;
+  }
+}
+
+.learnmore__btn {
+  width: 108px;
+  height: 39px;
+  background-color: var(--orange-color);
+  border: none;
+
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.02em;
+
+  color: var(--white-color);
+
+  @include tablet {
+    width: 160px;
+    height: 48px;
+
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  @include desktop {
+    width: 182px;
+  }
+}
+
+.add__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  width: 110px;
+  height: 39px;
+  background-color: var(--white-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.02em;
+  color: var(--accent-color);
+
+  @include tablet {
+    width: 125px;
+    height: 48px;
+
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  @include desktop {
+    width: 141px;
+  }
+}
+
+.cocktail__title {
+  font-family: 'Roboto';
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.62;
+  color: var(--black-color);
+
+  margin-top: 0;
+  margin-bottom: 16px;
+
+  @include tablet {
+    font-size: 28px;
+    line-height: 1.18;
+  }
+
+  @include desktop {
+    font-size: 32px;
+    line-height: 1.19;
+    margin-bottom: 28px;
+  }
+}
+
+.noresult__text {
+  font-family: 'Poppins';
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.91;
+  color: var(--black-color);
+
+  text-align: center;
+
+  @include tablet {
+    font-family: 'Roboto';
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.31;
+  }
+
+  @include desktop {
+    font-family: 'Poppins';
+    font-size: 48px;
+    line-height: 1.5;
+  }
+}
+
+.paginator {
+  display: flex;
+  justify-content: space-evenly;
+
+  margin-top: 24px;
+
+  @include tablet {
+    margin-top: 32px;
+  }
+}
+
+.pagination__list {
+  display: flex;
+
+  gap: 8;
+  font-family: 'Montserrat';
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+
+  color: var(--orange-color);
+
+  @include tablet {
+    gap: 14px;
+
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+.pagination__item {
+  text-align: center;
+  padding: 8px 12px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+
+  background: var(--white-color);
+  border: 1px solid #eaebea;
+  border-radius: 4px;
+
+  @include tablet {
+    width: 40px;
+    height: 40px;
+    padding: 10px 12px;
+  }
+
+  @include desktop {
+  }
+}
+
+.pagination__item--active {
+  color: var(--white-color);
+  background-color: var(--orange-color);
+}
+
+.icon-hert {
+  background-image: url('../images/heart.svg');
+}
+
+.arrow__back,
+.arrow__fore {
+  fill: var(--orange-color);
+}
+
+.backward,
+.forward {
+  width: 60px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  @include tablet {
+    border: 1px solid #eaebea;
+  }
+}
+
+.move__btn-disabled {
+  fill: #eaebea;
+}
