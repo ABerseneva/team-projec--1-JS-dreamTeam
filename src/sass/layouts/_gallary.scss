@@ -50,69 +50,58 @@
 }
 
 .cocktail__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
   width: 280px;
+
   margin: 0;
+
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+
+  transition: all 200ms linear;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 0px 14px 7px rgba(199, 103, 48, 0.81);
+  }
 
   @include tablet {
     @include calc(2, 32px);
   }
 
   @include desktop {
+    height: 575px;
     @include calc(3, 32px);
-  }
-}
-
-.cocktail__card {
-  border: 1px solid var(--accent-color);
-  border-radius: 4px;
-  height: 450px;
-
-  @include tablet {
-    height: auto;
   }
 }
 
 .cocktail__image {
   width: 100%;
   height: auto;
-  display: block;
 
-  @include tablet {
-    height: 395px;
-  }
-
-  @include desktop {
-    height: auto;
-  }
-}
-
-.cocktail__thumb {
-  padding-top: 48px;
-  padding-bottom: 24px;
-  text-align: center;
-
-  & button {
-    text-align: center;
-
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  @include tablet {
-    padding: 20px 0;
-  }
-
-  @include desktop {
-    padding-bottom: 28px;
-  }
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 20px;
 }
 
 .cocktail__btn--box {
   display: flex;
   gap: 17px;
   justify-content: center;
+  padding: 20px;
+
+  font-family: 'Roboto';
+  font-size: 14px;
+  line-height: 1.71;
+  letter-spacing: 0.02em;
 
   @include tablet {
+    font-size: 20px;
+    line-height: 1.2;
+
     gap: 12px;
   }
 
@@ -127,19 +116,21 @@
   background-color: var(--orange-color);
   border: none;
 
-  font-family: 'Roboto';
-  font-size: 14px;
-  line-height: 1.71;
-  letter-spacing: 0.02em;
+  border-radius: 5px;
 
   color: var(--white-color);
+
+  transition: background-color 200ms linear;
+
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+    outline: transparent;
+  }
 
   @include tablet {
     width: 160px;
     height: 48px;
-
-    font-size: 20px;
-    line-height: 1.2;
   }
 
   @include desktop {
@@ -157,20 +148,24 @@
   height: 39px;
   background-color: var(--white-color);
   border: 1px solid var(--accent-color);
-  border-radius: 4px;
+  border-radius: 5px;
 
-  font-family: 'Roboto';
-  font-size: 14px;
-  line-height: 1.71;
-  letter-spacing: 0.02em;
   color: var(--accent-color);
+
+  transition: all 200ms linear;
+
+  &:hover,
+  &:focus {
+    color: var(--orange-color);
+    border-color: var(--orange-color);
+    box-shadow: inset 0px 0px 42px -13px rgba(199, 103, 48, 0.81);
+
+    outline: transparent;
+  }
 
   @include tablet {
     width: 125px;
     height: 48px;
-
-    font-size: 20px;
-    line-height: 1.2;
   }
 
   @include desktop {
@@ -184,9 +179,7 @@
   font-size: 26px;
   line-height: 1.62;
   color: var(--black-color);
-
-  margin-top: 0;
-  margin-bottom: 16px;
+  text-align: center;
 
   @include tablet {
     font-size: 28px;
@@ -196,11 +189,15 @@
   @include desktop {
     font-size: 32px;
     line-height: 1.19;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
   }
 }
 
 .noresult__text {
+  width: 100%;
+
+  margin: 0 auto;
+  margin-bottom: 60px;
   font-family: 'Poppins';
   font-weight: 600;
   font-size: 22px;
@@ -217,9 +214,41 @@
   }
 
   @include desktop {
+    margin-bottom: 70px;
+    width: 500px;
+    margin-bottom: 70px;
     font-family: 'Poppins';
     font-size: 48px;
     line-height: 1.5;
+  }
+}
+
+.noresult__box {
+  width: 100%px;
+  height: 310px;
+  margin: 0 auto;
+  background-image: url(../images/hero-error/people-mob.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  @include retina {
+    background-image: url(../images/hero-error/people-mob-2x.png);
+  }
+
+  @include tablet {
+    width: 345px;
+    height: 380px;
+    background-image: url(../images/hero-error/coctail-tab.png);
+    @include retina {
+      background-image: url(../images/hero-error/people-tab-2x.png);
+    }
+  }
+
+  @include desktop {
+    background-image: url(../images/hero-error/people.png);
+    @include retina {
+      background-image: url(../images/hero-error/people-2x.png);
+    }
   }
 }
 
