@@ -85,8 +85,8 @@ function markupingBtn() {
         btn.textContent = 'Remove from favorite';
       } else {
         btn.innerHTML = `Remove
-     <svg class="icon-hert" width="19" height="17">
-            <use href="./symbol-defs.a8b2e413.svg#icon-heart-transparent"></use>
+     <svg class="icon-hert-fill" width="19" height="17">
+            <use href="./symbol-defs.a8b2e413.svg#icon-heart-orange"></use>
     </svg>`;
       }
     }
