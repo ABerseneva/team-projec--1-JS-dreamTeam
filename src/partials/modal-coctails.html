@@ -1,11 +1,11 @@
 <!-- ==========================удалить============ -->
-<div class="favorite-card" data-cocktail="11007">
-  <button class="button" data-modal-cockt-open>Open modal</button>
-</div>
+
+<button data-cocktail="11007">Open modal</button>
+
 <!-- ============================================= -->
 
 <div class="modal-cockt is-hidden" data-modal-cockt>
-  <div class="modal-cockt__card">
+  <div class="modal-cockt__card item" data-id="1">
     <button class="modal-cockt__close-btn" data-modal-cockt-close>
       <svg class="modal-cockt__close-icon" width="16" height="16">
         <use
@@ -15,32 +15,16 @@
     </button>
     <div class="modal-cockt__img-tumb">
       <img
-        class="modal-cockt__img"
+        class="modal-cockt__img image"
         src="/src/images/modal-coctails/ACID.jpg"
         alt="cocktail"
       />
     </div>
-    <h2 class="modal-cockt__name">Margarita</h2>
+    <h2 class="modal-cockt__name name">Margarita</h2>
     <div class="modal-cockt__ingedients-box">
       <h3 class="modal-cockt__title">Ingredients</h3>
       <p class="modal-cockt__post-title">Per cocktail</p>
-      <ul class="modal-cockt__per-list">
-        <li class="modal-cockt__ingred">
-          <p>Ice</p>
-        </li>
-        <li class="modal-cockt__ingred">
-          <p>1 ounce gin</p>
-        </li>
-        <li class="modal-cockt__ingred">
-          <p>1 ounce sweet vermouth</p>
-        </li>
-        <li class="modal-cockt__ingred">
-          <p>1 ounce sweet vermouth</p>
-        </li>
-        <li class="modal-cockt__ingred">
-          <p>Garnish: orange peel</p>
-        </li>
-      </ul>
+      <ul class="modal-cockt__per-list"></ul>
     </div>
     <div class="modal-cockt__instr">
       <h3 class="modal-cockt__instr-title">Instractions:</h3>
@@ -49,7 +33,7 @@
       </div>
     </div>
     <div class="modal-cockt__box-button">
-      <button class="button">Add to favorite</button>
+      <button class="modal-cockt__add-rem-btn">Add to favorite</button>
     </div>
   </div>
 </div>
