@@ -10,13 +10,10 @@ const refs = {
 //     item.addEventListener('click', toggleModal);
 //   }
 refs.modal.addEventListener('click', e => {
-  console.log(e.target === e.currentTarget);
   if (e.target === e.currentTarget) {
     toggleModal();
   }
 });
-
-console.log(refs.modal);
 
 refs.closeModalBtn.addEventListener('click', toggleModal);
 
