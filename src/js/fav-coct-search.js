@@ -10,22 +10,26 @@ let keyWord = '';
 form.addEventListener('submit', handSubmit);
 function handSubmit(event) {
   event.preventDefault();
-  const inputValue = form.searchQuery.value.trim();
+  const inputValue = form.searchQuery.value.trim().toLowerCase();
   if (!inputValue || keyWord === inputValue) {
     return;
   }
   keyWord = inputValue;
   //   page = 1;
-
+  console.log(keyWord);
   onSerch(keyWord);
   form.searchQuery.value = '';
 }
 
 function onSerch(keyWord) {
-  const names = coctailList.map(({ name }) => name);
+  const names = coctailList.map(({ name }) => name.toLowerCase());
+  console.log(names);
 
   if (names.some(value => value === keyWord)) {
-    const filteredCoctails = coctailList.filter(({ name }) => name === keyWord);
+    const filteredCoctails = coctailList.filter(
+      ({ name }) => name.toLowerCase() === keyWord
+    );
+    console.log(filteredCoctails);
     box.innerHTML = '';
     buildMarkup(filteredCoctails);
   } else {
