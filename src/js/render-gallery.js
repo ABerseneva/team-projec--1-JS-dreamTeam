@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { fetchRandomCoctails, fetchCocktailByName } from './fetch';
 import { markupingBtn } from './add-from-gallery';
+export { renderCocktails };
 
 const box = document.querySelector('.cocktail__list');
 const paginator = document.querySelector('.paginator');
