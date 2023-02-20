@@ -12,9 +12,10 @@
 }
 
 .modal-ingrid {
+    overflow: scroll;
     z-index: 99;
     width: 320px;
-    min-height: 673px;
+    max-height: 673px;
     padding-top: 40px;
     padding-left: 15px;
     padding-right: 25px;
@@ -123,6 +124,7 @@
         color: var(--black-color);
 
     }
+    
 }
 
 .modal-ingrid__list {
