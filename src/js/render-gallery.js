@@ -5,8 +5,6 @@ import {
   fetchCocktailByLetter,
 } from './fetch';
 import { markupingBtn } from './add-from-gallery';
-
-import { onLetterClick } from './hero-alphabet';
 import personalheart from '../images/personalheart.svg';
 
 const box = document.querySelector('.cocktail__list');
@@ -27,9 +25,8 @@ export async function onClick(e) {
   e.preventDefault();
   title.classList.remove('visually-hidden');
   const searchValue = e.target.dataset.letter;
-  console.log(e.target.dataset.letter);
 
-  paginator.classList.add('visually-hidden');
+  paginator.classList.remove('visually-hidden');
 
   box.innerHTML = '';
   const requestedData = await fetchCocktailByLetter(searchValue);
@@ -66,19 +63,8 @@ async function renderRandomCocktails() {
 }
 renderRandomCocktails();
 
-async function buildGallery(searchValue) {
-  const cocktails = await fetchCocktailByName(searchValue);
-  // console.log(cocktails);
-  // if (cocktails === null) {
-  //   const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>
-  //                    <div class='noresult__box'></div>`;
-  //   sectionGallery.innerHTML = noMatch;
-  //   return;
-  // }
-
-  perPage = pagesMediaCheck();
-
-  renderCocktails(cocktails, perPage, currentPage);
+function buildGallery(searchValue) {
+  // renderCocktails(cocktails, perPage, currentPage);
 
   function displayPagination(cocktailList, perPage) {
     const totalPages = Math.ceil(cocktailList.length / perPage);
@@ -140,7 +126,7 @@ function buildMarkup(data) {
       <img class='cocktail__image image' src='${strDrinkThumb}' alt='cocktail'/>
       <h3 class='cocktail__title name'>${strDrink}</h3>
       <div class='cocktail__btn--box'>
-      <button class='learnmore__btn' type='button' data-modal-cockt-open >Learn More</button>
+      <button class='learnmore__btn' type='button' data-cocktail='${idDrink}'>Learn More</button>
       <button class='add__btn' type='button' data-add>Add to
      <svg class="icon-hert" width="17" height="15">
             <use href="${personalheart + '#icon-black'}"></use>
