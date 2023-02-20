@@ -1,4 +1,4 @@
-<section class="section-hero">
+<section class="section-hero container">
   <div class="hero-container">
     <div class="section-content">
       <h1 class="hero__title">A party without cocktails is not like a party</h1>
@@ -45,11 +45,25 @@
     </div>
     <div class="picture-section">
       <picture>
-        <source srcset="./images/desc1x.png 1x, ./images/desc2x.png 2x" media="(min-width: 1280px)" />
-        <source srcset="./images/tab1x.png 1x, ./images/tab2x.png 2x" media="(min-width: 768px)" />
+        <source
+          srcset="./images/desc1x.png 1x, ./images/desc2x.png 2x"
+          media="(min-width: 1280px)"
+        />
+        <source
+          srcset="./images/tab1x.png 1x, ./images/tab2x.png 2x"
+          media="(min-width: 768px)"
+        />
 
-        <source srcset="./images/mob1x.png 1x, ./images/mob2x.png 2x" media="(max-width: 767px)" />
-        <img class="hero__img" src="./images/mob1x.png" alt="drink" loading="lazy" />
+        <source
+          srcset="./images/mob1x.png 1x, ./images/mob2x.png 2x"
+          media="(max-width: 767px)"
+        />
+        <img
+          class="hero__img"
+          src="./images/mob1x.png"
+          alt="drink"
+          loading="lazy"
+        />
       </picture>
     </div>
     <p class="hero__text mob">Search your favorite cocktail by ABC</p>
@@ -67,7 +81,7 @@
       </div>
     </div>
   </div>
-  <div class="container sorry visually-hidden">
+  <!-- <div class="container sorry visually-hidden">
     <h2 class="sorry__title">Sorry, we didn't find any cocktail for you</h2>
     <div class="sorry__picture">
       <picture>
@@ -81,5 +95,5 @@
         <img class="sorry__img" src="./images/hero-error/people-mob.png" alt="group" loading="lazy" />
       </picture>
     </div>
-  </div>
+  </div> -->
 </section>
