@@ -1,24 +1,21 @@
 // =====================открвтие модалки=================
 
-(() => {
-  const refs = {
-    openModalBtn: document.querySelector('[data-modal-cockt-open]'),
-    closeModalBtn: document.querySelector('[data-modal-cockt-close]'),
-    modal: document.querySelector('[data-modal-cockt]'),
-    body: document.querySelector('body'),
-  };
+const refs = {
+  closeModalBtn: document.querySelector('[data-modal-cockt-close]'),
+  modal: document.querySelector('[data-modal-cockt]'),
+  body: document.querySelector('body'),
+};
 
-  //   for (item of refs.openModalList) {
-  //     item.addEventListener('click', toggleModal);
-  //   }
-  refs.openModalBtn.addEventListener('click', toggleModal);
-  refs.closeModalBtn.addEventListener('click', toggleModal);
+//   for (item of refs.openModalList) {
+//     item.addEventListener('click', toggleModal);
+//   }
+// refs.openModalBtn.addEventListener('click', toggleModal);
+refs.closeModalBtn.addEventListener('click', toggleModal);
 
-  function toggleModal() {
-    refs.modal.classList.toggle('is-hidden');
-    refs.body.classList.toggle('no-scroll');
-  }
-})();
+function toggleModal() {
+  refs.modal.classList.toggle('is-hidden');
+  refs.body.classList.toggle('no-scroll');
+}
 
 // ===========================================
 
@@ -31,9 +28,10 @@ const list = document.querySelector('.modal-cockt__per-list');
 const image = document.querySelector('.modal-cockt__img');
 
 document.addEventListener('click', e => {
-  if (e.target === learnMoreBtn) {
+  if (e.target.dataset.cocktail) {
     const cocktaiId = Number(e.target.dataset.cocktail);
     getCocktailData(cocktaiId);
+    toggleModal();
   }
   return;
 });
@@ -67,20 +65,24 @@ function renderCocktailCard(cocktail) {
       if (!cocktail[`strMeasure${i}`]) {
         perList.push(
           `<li class="modal-cockt__ingred">
-          <p>
-          <span data-ingredient="${cocktail[`strIngredient${i}`]}">
-            ${cocktail[`strIngredient${i}`]}
-          </span></p>
+          <a>
+            <p>
+            <span data-ingredient="${cocktail[`strIngredient${i}`]}">
+              ${cocktail[`strIngredient${i}`]}
+            </span></p>
+          </a>
         </li>`
         );
         break;
       }
       perList.push(
         `<li class="modal-cockt__ingred">
-          <p>${cocktail[`strMeasure${i}`]}
-          <span data-ingredient="${cocktail[`strIngredient${i}`]}">
-            ${cocktail[`strIngredient${i}`]}
-          </span></p>
+          <a>
+            <p>${cocktail[`strMeasure${i}`]}
+            <span data-ingredient="${cocktail[`strIngredient${i}`]}">
+              ${cocktail[`strIngredient${i}`]}
+            </span></p>
+          </a>
         </li>`
       );
     }

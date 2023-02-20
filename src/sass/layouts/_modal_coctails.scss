@@ -36,11 +36,11 @@
 }
 
 .modal-cockt {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   overflow: auto;
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(5px);
@@ -137,10 +137,12 @@
 }
 
 .modal-cockt__ingedients-box {
+  color: var(--black-color);
   grid-area: ingedientsbox;
 }
 
 .modal-cockt__name {
+  color: var(--black-color);
   grid-area: name;
 
   @include font(900, 32, 1.18, null);
@@ -177,6 +179,7 @@
 
 
 .modal-cockt__instr-title {
+  color: var(--black-color);
   padding-bottom: 20px;
 
   font-weight: 600;
@@ -248,11 +251,37 @@
   }
 }
 
-.button {
-  border: none;
-  color: #fff;
-  background: #fd5103;
-  border-radius: 4px;
-  height: 50px;
+.modal-cockt__add-rem-btn {
+
   padding: 0 20px;
+  height: 39px;
+  background-color: var(--orange-color);
+  border: none;
+
+  border-radius: 5px;
+
+  color: var(--white-color);
+
+  transition: background-color 200ms linear;
+
+  &:hover,
+  &:focus {
+    background-color: var(--accent-color);
+    outline: transparent;
+  }
+
+  @include tablet {
+    
+    height: 48px;
+  }
+
+  @include desktop {
+    height: 48px;
+  }
 }
+
+.modal-cockt__ingred a {
+cursor: pointer;
+
+}
+
