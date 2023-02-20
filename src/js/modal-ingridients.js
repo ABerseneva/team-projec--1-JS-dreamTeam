@@ -1,14 +1,11 @@
-(() => {
+import axios from 'axios';
+const box = document.querySelector('.box-ingrid');
+  
   const refs = {
-    openModalBtn: document.querySelectorAll("[data-modal-ingrid-open]"),
     closeModalBtn: document.querySelector("[data-modal-ingrid-close]"),
     modal: document.querySelector("[data-modal-ingrid]"),
     body: document.querySelector('body'),
   };
-
-  refs.openModalBtn.forEach((btn) => {
-    btn.addEventListener("click", toggleModal);
-  });
 
   refs.closeModalBtn.addEventListener("click", toggleModal);
   refs.modal.addEventListener("click", closeModal);
@@ -25,20 +22,14 @@
   }
 }
 
-})();
-
-
-import axios from 'axios';
-
-const box = document.querySelector('.box-ingrid');
-const ingridClick = Array.from(document.querySelectorAll('.test'));
-
-ingridClick.forEach((ingrid) => {
-  ingrid.addEventListener('click', async () => {
-    const ingridName = ingrid.dataset.name;
+  document.addEventListener('click', async (e) => {
+  if (e.target.dataset.ingredient) {
+    const ingridName = e.target.dataset.ingredient;
     const ingridData = await fetchIngridient(ingridName);
     buildMarkup(ingridData);
-  });
+    toggleModal();
+  }
+  return;
 });
 
 async function fetchIngridient(queryToFetch) {
