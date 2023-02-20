@@ -43,12 +43,12 @@ renderRandomCocktails();
 async function buildGallery(searchValue) {
   const cocktails = await fetchCocktailByName(searchValue);
   // console.log(cocktails);
-  if (cocktails === null) {
-    const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>
-                     <div class='noresult__box'></div>`;
-    sectionGallery.innerHTML = noMatch;
-    return;
-  }
+  // if (cocktails === null) {
+  //   const noMatch = `<p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>
+  //                    <div class='noresult__box'></div>`;
+  //   sectionGallery.innerHTML = noMatch;
+  //   return;
+  // }
 
   perPage = pagesMediaCheck();
 
