@@ -9,13 +9,30 @@ const refs = {
 //   for (item of refs.openModalList) {
 //     item.addEventListener('click', toggleModal);
 //   }
-// refs.openModalBtn.addEventListener('click', toggleModal);
+refs.modal.addEventListener('click', e => {
+  console.log(e.target === e.currentTarget);
+  if (e.target === e.currentTarget) {
+    toggleModal();
+  }
+});
+
+console.log(refs.modal);
+
 refs.closeModalBtn.addEventListener('click', toggleModal);
 
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');
   refs.body.classList.toggle('no-scroll');
 }
+
+document.addEventListener('click', e => {
+  if (e.target.dataset.cocktail) {
+    const cocktaiId = Number(e.target.dataset.cocktail);
+    getCocktailData(cocktaiId);
+    toggleModal();
+  }
+  return;
+});
 
 // ===========================================
 
@@ -26,15 +43,6 @@ const name = document.querySelector('.modal-cockt__name');
 const instractions = document.querySelector('.modal-cockt__instr-text');
 const list = document.querySelector('.modal-cockt__per-list');
 const image = document.querySelector('.modal-cockt__img');
-
-document.addEventListener('click', e => {
-  if (e.target.dataset.cocktail) {
-    const cocktaiId = Number(e.target.dataset.cocktail);
-    getCocktailData(cocktaiId);
-    toggleModal();
-  }
-  return;
-});
 
 async function getCocktailData(cocktaiId) {
   const cocktail = await fetchCocktail(cocktaiId);
