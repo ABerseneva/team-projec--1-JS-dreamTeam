@@ -19,38 +19,45 @@ form.addEventListener('submit', onSearch);
 let randomList = [];
 export let currentPage = 1;
 export let perPage = 0;
+let totalPages = 0;
 perPage = pagesMediaCheck();
 
 export async function onClick(e) {
   e.preventDefault();
+  currentPage = 1;
+  paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
   const searchValue = e.target.dataset.letter;
 
-  paginator.classList.remove('visually-hidden');
-
   box.innerHTML = '';
   const requestedData = await fetchCocktailByLetter(searchValue);
-  console.log(requestedData);
   if (requestedData === null) {
     return errorMarkup();
   }
+
   renderCocktails(requestedData, perPage, currentPage);
+  if (requestedData.length > perPage) {
+    buildGallery(requestedData);
+  }
 }
 
 async function onSearch(e) {
   e.preventDefault();
+  currentPage = 1;
+  paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
   const searchValue = e.target.elements.searchQuery.value;
 
-  paginator.classList.add('visually-hidden');
-
   box.innerHTML = '';
   const requestedData = await fetchCocktailByName(searchValue);
-  console.log(requestedData);
   if (requestedData === null) {
     return errorMarkup();
   }
+
   renderCocktails(requestedData, perPage, currentPage);
+  if (requestedData.length > perPage) {
+    buildGallery(requestedData);
+  }
   form.reset();
 }
 
@@ -64,10 +71,42 @@ async function renderRandomCocktails() {
 renderRandomCocktails();
 
 function buildGallery(searchValue) {
-  // renderCocktails(cocktails, perPage, currentPage);
+  paginatorList.innerHTML = '';
+  paginator.classList.remove('visually-hidden');
+  let totalPages = Math.ceil(searchValue.length / perPage);
 
-  function displayPagination(cocktailList, perPage) {
-    const totalPages = Math.ceil(cocktailList.length / perPage);
+  const forward = document.querySelector('.forward');
+  const backward = document.querySelector('.backward');
+  backward.disabled = true;
+  backward.classList.add('move__btn-disabled');
+
+  backward.addEventListener('click', () => {
+    currentPage--;
+    paginatorList.innerHTML = '';
+    renderCocktails(searchValue, perPage, currentPage);
+    displayPagination();
+    forward.disabled = false;
+    forward.classList.remove('move__btn-disabled');
+    if (currentPage === 1) {
+      backward.disabled = true;
+      backward.classList.add('move__btn-disabled');
+    }
+  });
+
+  forward.addEventListener('click', () => {
+    currentPage++;
+    paginatorList.innerHTML = '';
+    renderCocktails(searchValue, perPage, currentPage);
+    displayPagination();
+    backward.disabled = false;
+    backward.classList.remove('move__btn-disabled');
+    if (currentPage === totalPages) {
+      forward.disabled = true;
+      forward.classList.add('move__btn-disabled');
+    }
+  });
+
+  function displayPagination() {
     for (let i = 0; i < totalPages; i++) {
       const cocktailItem = displayPaginationBtn(i + 1);
       paginatorList.append(cocktailItem);
@@ -85,7 +124,21 @@ function buildGallery(searchValue) {
 
     cocktailItem.addEventListener('click', () => {
       currentPage = number;
-      renderCocktails(cocktails, perPage, currentPage);
+      renderCocktails(searchValue, perPage, currentPage);
+      backward.disabled = true;
+      backward.classList.add('move__btn-disabled');
+      forward.disabled = true;
+      forward.classList.add('move__btn-disabled');
+
+      if (currentPage !== 1) {
+        backward.disabled = false;
+        backward.classList.remove('move__btn-disabled');
+      }
+
+      if (currentPage !== totalPages) {
+        forward.disabled = false;
+        forward.classList.remove('move__btn-disabled');
+      }
 
       let currentActive = document.querySelector('li.pagination__item--active');
       currentActive.classList.remove('pagination__item--active');
@@ -95,10 +148,32 @@ function buildGallery(searchValue) {
     return cocktailItem;
   }
 
-  displayPagination(cocktails, perPage);
+  displayPagination();
 }
 
-// buildGallery('a');
+function superCheck() {
+  if (currentPage === totalPages) {
+    forward.disable = true;
+    forward.classList.add('move__btn-disabled');
+  }
+  if (currentPage === 1) {
+    backward.disable = true;
+    backward.classList.add('move__btn-disabled');
+  }
+}
+
+function arrowBtnControl() {
+  const backward = document.querySelector('.backward');
+  const forward = document.querySelector('.forward');
+  backward.addEventListener('click', () => {
+    currentPage--;
+    return renderCocktails(searchValue, perPage, currentPage);
+  });
+  forward.addEventListener('click', () => {
+    currentPage++;
+    return renderCocktails(searchValue, perPage, currentPage);
+  });
+}
 
 function pagesMediaCheck() {
   if (window.matchMedia('(min-width: 320px)').matches) {
@@ -149,19 +224,11 @@ function renderCocktails(cocktailList, perPage, page) {
   return buildMarkup(paginatedData);
 }
 
-function arrowBtnControl(number) {
-  const backward = document.querySelector('.backward');
-  const forward = document.querySelector('.forward');
-  backward.addEventListener('click', () => number--);
-  forward.addEventListener('click', () => number++);
-
-  return number;
-}
-
 function errorMarkup() {
   const noMatch = `<div class='noresult__container'>
                      <p class='noresult__text'>Sorry, we didn't find any cocktail for you</p>
                      <div class='noresult__box'></div></div>`;
   title.classList.add('visually-hidden');
+  paginatorList.innerHTML = '';
   return (box.innerHTML = noMatch);
 }
