@@ -1,4 +1,4 @@
-// import personalheart from '../images/personalheart.svg';
+import personalheart from '../images/personalheart.svg';
 
 const box = document.querySelector('.cocktail__list');
 const paginator = document.querySelector('.paginator');
@@ -69,11 +69,11 @@ export function buildMarkup(data) {
       <img class='cocktail__image image' src="${src}" alt='cocktail'/>
       <h3 class='cocktail__title name'>${name}</h3>
       <div class='cocktail__btn--box'>
-      <button class='learnmore__btn' type='button' data-modal-cockt-open>Learn More</button>
+     <button class='learnmore__btn' type='button' data-cocktail='${id}'>Learn More</button>
       <button class='add__btn' type='button' data-add>Remove
-     <svg class="icon-hert-fill" width="19" height="17">
-            <use href="./symbol-defs.a8b2e413.svg#icon-heart-orange"></use>
-    </svg>
+     <svg class="icon-hert-remove" width="17" height="15">
+     <use href="${personalheart + '#fullorrange'}"></use>
+   </svg>
      </button>
       </div>
       </li>`;
