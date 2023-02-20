@@ -1,5 +1,12 @@
-@import '.sass/untils/mixins';
-@import '.sass/base/box';
-@import '.sass/base/common';
-@import '.sass/untils/variables';
-@import '.sass/base/reset';
+@import './untils/mixins';
+@import './base/box';
+@import './base/common';
+@import './untils/variables';
+@import './base/reset';
+
+@import './layouts/header';
+@import './layouts/ingridients';
+@import './layouts/footer';
+
+@import './layouts/modal_coctails';
+@import './layouts/modal-ingridients';
