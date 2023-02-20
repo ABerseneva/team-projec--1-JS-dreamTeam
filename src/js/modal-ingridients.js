@@ -1,28 +1,41 @@
 (() => {
   const refs = {
-    openModalBtn: document.querySelector("[data-modal-ingrid-open]"),
+    openModalBtn: document.querySelectorAll("[data-modal-ingrid-open]"),
     closeModalBtn: document.querySelector("[data-modal-ingrid-close]"),
     modal: document.querySelector("[data-modal-ingrid]"),
     body: document.querySelector('body'),
   };
 
-  refs.openModalBtn.addEventListener("click", toggleModal);
+  refs.openModalBtn.forEach((btn) => {
+    btn.addEventListener("click", toggleModal);
+  });
+
   refs.closeModalBtn.addEventListener("click", toggleModal);
+  refs.modal.addEventListener("click", closeModal);
 
   function toggleModal() {
     refs.modal.classList.toggle("is-hidden");
     refs.body.classList.toggle('no-scroll');
   }
+
+  function closeModal(event) {
+  if (event.target === refs.modal) {
+    refs.modal.classList.toggle("is-hidden");
+    refs.body.classList.toggle('no-scroll');
+  }
+}
+
 })();
+
 
 import axios from 'axios';
 
 const box = document.querySelector('.box-ingrid');
-const ingridClick = document.querySelectorAll('.modal-cockt__ingred')
+const ingridClick = Array.from(document.querySelectorAll('.test'));
 
 ingridClick.forEach((ingrid) => {
-  ingrid.addEventListener('click', async (e) => {
-    const ingridName = e.target.dataset.name;
+  ingrid.addEventListener('click', async () => {
+    const ingridName = ingrid.dataset.name;
     const ingridData = await fetchIngridient(ingridName);
     buildMarkup(ingridData);
   });
