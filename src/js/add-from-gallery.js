@@ -1,4 +1,4 @@
-// import personalheart from '../images/personalheart.svg';
+import personalheart from '../images/personalheart.svg';
 
 const addBtn = document.querySelectorAll('.add__btn');
 const coctailse = [];
@@ -81,8 +81,8 @@ export function markupingBtn() {
         btn.textContent = 'Remove from favorite';
       } else {
         btn.innerHTML = `Remove
-    <svg class="icon-hert" width="17" height="15">
-     <use href="${personalheart + '#icon-black'}"></use>
+    <svg class=""icon-hert-remove" width="17" height="15">
+     <use href="${personalheart + '#fullorrange'}"></use>
    </svg>`;
       }
     }

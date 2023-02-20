@@ -2,7 +2,6 @@ import './js/coctail-card';
 import './js/favorite-list';
 // import './js/local-storage';
 import './js/mobile-menu';
-// import './js/add-from-gallery';
 // import './js/modal-coctails';
 // import './js/modal-ingridients';
 import './js/pagination';
