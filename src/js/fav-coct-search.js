@@ -12,6 +12,7 @@ function handSubmit(event) {
   event.preventDefault();
   const inputValue = form.searchQuery.value.trim().toLowerCase();
   if (!inputValue || keyWord === inputValue) {
+    form.searchQuery.value = '';
     return;
   }
   keyWord = inputValue;
@@ -25,9 +26,10 @@ function onSerch(keyWord) {
   const names = coctailList.map(({ name }) => name.toLowerCase());
   console.log(names);
 
-  if (names.some(value => value === keyWord)) {
+  if (names.some(value => value === keyWord || value.includes(keyWord))) {
     const filteredCoctails = coctailList.filter(
-      ({ name }) => name.toLowerCase() === keyWord
+      ({ name }) =>
+        name.toLowerCase() === keyWord || name.toLowerCase().includes(keyWord)
     );
     console.log(filteredCoctails);
     box.innerHTML = '';
