@@ -24,16 +24,21 @@
 
 import axios from 'axios';
 
-const favoriteCard = document.querySelector('.favorite-card');
+const learnMoreBtn = document.querySelector('.learn-more-btn');
 const name = document.querySelector('.modal-cockt__name');
 const instractions = document.querySelector('.modal-cockt__instr-text');
 const list = document.querySelector('.modal-cockt__per-list');
 const image = document.querySelector('.modal-cockt__img');
 
-favoriteCard.addEventListener('click', e => {
-  const cocktaiId = Number(e.currentTarget.dataset.cocktail);
-  console.log(cocktaiId);
-  getCocktailData(cocktaiId);
+document.addEventListener('click', e => {
+  console.log(e.target);
+
+  if (e.target === learnMoreBtn) {
+    const cocktaiId = Number(e.target.dataset.cocktail);
+    console.log(cocktaiId);
+    getCocktailData(cocktaiId);
+  }
+  return;
 });
 
 async function getCocktailData(cocktaiId) {
@@ -63,6 +68,17 @@ function renderCocktailCard(cocktail) {
   list.innerHTML = '';
   for (let i = 1; i < 15; i++) {
     if (cocktail[`strMeasure${i}`] || cocktail[`strIngredient${i}`]) {
+      if (!cocktail[`strMeasure${i}`]) {
+        perList.push(
+          `<li class="modal-cockt__ingred">
+          <p>
+          <span data-ingredient="${cocktail[`strIngredient${i}`]}">
+            ${cocktail[`strIngredient${i}`]}
+          </span></p>
+        </li>`
+        );
+        break;
+      }
       perList.push(
         `<li class="modal-cockt__ingred">
           <p>${cocktail[`strMeasure${i}`]}
