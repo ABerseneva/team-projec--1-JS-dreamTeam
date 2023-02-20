@@ -5,7 +5,7 @@
   "homepage": "https://ABerseneva.github.io/team-projec--1-JS-dreamTeam/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /team-number-one-js/"
+    "build": "parcel build src/*.html --public-url /team-projec--1-JS-dreamTeam/"
   },
   "repository": {
     "type": "git",

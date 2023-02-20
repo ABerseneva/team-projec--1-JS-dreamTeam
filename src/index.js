@@ -5,7 +5,7 @@ import './js/hero-alphabet';
 import './js/add-from-gallery';
 import './js/mobile-menu';
 import './js/modal-coctails';
-import './js/modal-ingridients';
+// import './js/modal-ingridients';
 import './js/pagination';
 import './js/render-gallery';
 import './js/color-switch';
