@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { renderCocktails } from './render-gallery'
+import { onClick } from './render-gallery';
 import mob from '../images/hero-error/people-mob.png';
 import mob2 from '../images/hero-error/people-mob-2x.png';
 import tab from '../images/hero-error/people-tab.png';
@@ -73,26 +73,24 @@ function createButtonsMarkup() {
     .join('');
 }
 
-
-
 // search by letter
 
-class CocktailApiService {
-    constructor() {
-        this.BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
-        this.searchQuery = ''; 
-        this.drinks = {};
-    }
-    async fetchCocktaileByFirstLetter() {
-        try {
-            const url = `${this.BASE_URL}search.php?f=${this.searchQuery}`;
-            const response = await axios.get(url);
-            this.drinks = response.data.drinks;
-        } catch (error) {
-            throw new Error(error.message);
-        }
-    }
-}
+// class CocktailApiService {
+//   constructor() {
+//     this.BASE_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
+//     this.searchQuery = '';
+//     this.drinks = {};
+//   }
+//   async fetchCocktaileByFirstLetter() {
+//     try {
+//       const url = `${this.BASE_URL}search.php?f=${this.searchQuery}`;
+//       const response = await axios.get(url);
+//       this.drinks = response.data.drinks;
+//     } catch (error) {
+//       throw new Error(error.message);
+//     }
+//   }
+// }
 
 // NoResultRender
 function noResultRender() {
@@ -123,35 +121,29 @@ function noResultRender() {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-
-
-
-
-const cocktailApiService = new CocktailApiService();
+// const cocktailApiService = new CocktailApiService();
 let checked = document.querySelector('.select__input');
 let mobOpen = document.querySelector('.gallery__title');
 
-lettersList.addEventListener('click', onLetterClick);
+lettersList.addEventListener('click', onClick);
 inputMobile.addEventListener('click', onMobLetterClick);
 
-async function onLetterClick(e) {
-  checked.classList.add('select__input-checked');
-    if (!e.target.dataset.letter)
-        return;
-  cocktailApiService.searchQuery = e.target.dataset.letter;
+// export async function onLetterClick(e) {
+//   checked.classList.add('select__input-checked');
+//   if (!e.target.dataset.letter) return;
+//   cocktailApiService.searchQuery = e.target.dataset.letter;
 
-  try {
-    await cocktailApiService.fetchCocktaileByFirstLetter();
-    if (!cocktailApiService.drinks)
-      return noResultRender();
+//   try {
+//     await cocktailApiService.fetchCocktaileByFirstLetter();
+//     if (!cocktailApiService.drinks) return noResultRender();
+//     console.log(cocktailApiService.drinks);
 
-    renderCocktails(cocktailApiService.drinks);
-    galleryTitle.textContent = 'Cocktails';
-  }
-  catch (error) {
-    console.log(error.message);
-  }
-}
+//     // renderCocktails(cocktailApiService.drinks, perPage, currentPage);
+//     galleryTitle.textContent = 'Cocktails';
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// }
 
 function onMobLetterClick() {
   mobOpen.classList.add('mob-open');
@@ -163,12 +155,9 @@ function onMobLetterClick() {
 
   createDroplist();
   selectLetter.lastChild.addEventListener('click', e => {
-    onLetterClick(e);
+    onClick(e);
     inputSpan.textContent = e.target.dataset.letter.toUpperCase();
     selectLetter.lastChild.remove();
     mobOpen.classList.remove('mob-open');
   });
 }
-
-
-

@@ -193,6 +193,14 @@
   }
 }
 
+.noresult__container {
+  margin: 0 auto;
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .noresult__text {
   width: 100%;
 
@@ -333,4 +341,10 @@
 
 .move__btn-disabled {
   fill: #eaebea;
+}
+
+.icon-hert {
+  width: 17px;
+  height: 15px;
+  fill: var(--white-color);
 }

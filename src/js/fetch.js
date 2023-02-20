@@ -24,3 +24,16 @@ export async function fetchCocktailByName(queryToFetch) {
     error => console.log(error.message);
   }
 }
+
+export async function fetchCocktailByLetter(queryToFetch) {
+  let cocktails = [];
+  try {
+    const result = await axios.get(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${queryToFetch}`
+    );
+    cocktails = await result.data.drinks;
+    return cocktails;
+  } catch {
+    error => console.log(error.message);
+  }
+}
