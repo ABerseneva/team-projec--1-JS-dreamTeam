@@ -4,26 +4,26 @@
     closeModalBtn: document.querySelector("[data-modal-ingrid-close]"),
     modal: document.querySelector("[data-modal-ingrid]"),
     body: document.querySelector('body'),
-    // noBackdrop: document.querySelector("[data-modal-ingrid-noBackdrop]"),
   };
 
   refs.openModalBtns.forEach((btn) => {
     btn.addEventListener("click", toggleModal);
   });
   refs.closeModalBtn.addEventListener("click", toggleModal);
-  refs.modal.addEventListener("click", toggleModal);
+  refs.modal.addEventListener("click", closeModal);
 
   function toggleModal() {
     refs.modal.classList.toggle("is-hidden");
     refs.body.classList.toggle('no-scroll');
   }
 
-  // if (target !== refs.noBackdrop) {
-  //   refs.modal.classList.add("is-hidden");
-  //   refs.body.classList.remove("no-scroll");
-  // }
-
-})();
+  function closeModal(event) {
+    if (event.target == refs.modal) {
+      refs.modal.classList.add("is-hidden");
+      refs.body.classList.remove("no-scroll");
+    }
+  }
+})(); 
 // -------------------------------------------------------------------------------------
 
 import axios from 'axios';
@@ -33,7 +33,7 @@ const ingridClick = Array.from(document.querySelectorAll('.modal-cockt__ingred')
 
 ingridClick.forEach((ingrid) => {
   ingrid.addEventListener('click', async () => {
-    const ingridName = ingrid.dataset.name;
+    const ingridName = ingrid.dataset.ingredient;
     const ingridData = await fetchIngridient(ingridName);
     buildMarkup(ingridData);
   });
@@ -68,6 +68,7 @@ function buildMarkup(data) {
                     <li class="modal-ingrid__component"><p><span>&#10038;</span> Flavour: Bitter, spicy and sweet</p></li>
                 </ul>`;
     box.innerHTML = markup;
+  // box.insertAdjacentHTML('beforeend', markup);
 }
 
 
