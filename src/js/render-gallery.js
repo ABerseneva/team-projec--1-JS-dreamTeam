@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   fetchRandomCoctails,
   fetchCocktailByName,
@@ -13,11 +12,13 @@ const paginatorList = document.querySelector('.pagination__list');
 const sectionGallery = document.querySelector('.cocktail__section');
 const form = document.querySelector('.header-search-icon');
 const title = document.querySelector('.gallery__title');
+const forward = document.querySelector('.forward');
+const backward = document.querySelector('.backward');
 
 form.addEventListener('submit', onSearch);
 
 let randomList = [];
-export let currentPage = 1;
+let currentPage = 1;
 export let perPage = 0;
 let totalPages = 0;
 perPage = pagesMediaCheck();
@@ -73,38 +74,41 @@ renderRandomCocktails();
 function buildGallery(searchValue) {
   paginatorList.innerHTML = '';
   paginator.classList.remove('visually-hidden');
-  let totalPages = Math.ceil(searchValue.length / perPage);
 
-  const forward = document.querySelector('.forward');
-  const backward = document.querySelector('.backward');
-  backward.disabled = true;
-  backward.classList.add('move__btn-disabled');
+  totalPages = Math.ceil(searchValue.length / perPage);
 
-  backward.addEventListener('click', () => {
+  if (currentPage === 1) {
+    backward.disabled = true;
+    forward.disabled = false;
+  }
+  forward.removeEventListener('click', moveFore);
+  backward.removeEventListener('click', moveBack);
+
+  backward.addEventListener('click', moveBack);
+  function moveBack() {
     currentPage--;
     paginatorList.innerHTML = '';
     renderCocktails(searchValue, perPage, currentPage);
     displayPagination();
     forward.disabled = false;
-    forward.classList.remove('move__btn-disabled');
+
     if (currentPage === 1) {
       backward.disabled = true;
-      backward.classList.add('move__btn-disabled');
     }
-  });
+  }
 
-  forward.addEventListener('click', () => {
+  forward.addEventListener('click', moveFore);
+  function moveFore() {
     currentPage++;
     paginatorList.innerHTML = '';
     renderCocktails(searchValue, perPage, currentPage);
     displayPagination();
     backward.disabled = false;
-    backward.classList.remove('move__btn-disabled');
+
     if (currentPage === totalPages) {
       forward.disabled = true;
-      forward.classList.add('move__btn-disabled');
     }
-  });
+  }
 
   function displayPagination() {
     for (let i = 0; i < totalPages; i++) {
@@ -126,18 +130,14 @@ function buildGallery(searchValue) {
       currentPage = number;
       renderCocktails(searchValue, perPage, currentPage);
       backward.disabled = true;
-      backward.classList.add('move__btn-disabled');
       forward.disabled = true;
-      forward.classList.add('move__btn-disabled');
 
       if (currentPage !== 1) {
         backward.disabled = false;
-        backward.classList.remove('move__btn-disabled');
       }
 
       if (currentPage !== totalPages) {
         forward.disabled = false;
-        forward.classList.remove('move__btn-disabled');
       }
 
       let currentActive = document.querySelector('li.pagination__item--active');
@@ -149,30 +149,6 @@ function buildGallery(searchValue) {
   }
 
   displayPagination();
-}
-
-function superCheck() {
-  if (currentPage === totalPages) {
-    forward.disable = true;
-    forward.classList.add('move__btn-disabled');
-  }
-  if (currentPage === 1) {
-    backward.disable = true;
-    backward.classList.add('move__btn-disabled');
-  }
-}
-
-function arrowBtnControl() {
-  const backward = document.querySelector('.backward');
-  const forward = document.querySelector('.forward');
-  backward.addEventListener('click', () => {
-    currentPage--;
-    return renderCocktails(searchValue, perPage, currentPage);
-  });
-  forward.addEventListener('click', () => {
-    currentPage++;
-    return renderCocktails(searchValue, perPage, currentPage);
-  });
 }
 
 function pagesMediaCheck() {
@@ -214,7 +190,7 @@ function buildMarkup(data) {
   markupingBtn();
 }
 
-function renderCocktails(cocktailList, perPage, page) {
+export function renderCocktails(cocktailList, perPage, page) {
   page--;
   box.innerHTML = '';
 
