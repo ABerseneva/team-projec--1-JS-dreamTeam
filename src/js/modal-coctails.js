@@ -23,6 +23,7 @@ function toggleModal() {
 }
 
 document.addEventListener('click', e => {
+  consol.log(e.target);
   if (e.target.dataset.cocktail) {
     const cocktaiId = Number(e.target.dataset.cocktail);
     getCocktailData(cocktaiId);
@@ -34,17 +35,19 @@ document.addEventListener('click', e => {
 // ===========================================
 
 import axios from 'axios';
+import { markupingBtn } from './add-from-gallery';
 
-const learnMoreBtn = document.querySelector('.learn-more-btn');
+// const learnMoreBtn = document.querySelector('.learn-more-btn');
 const name = document.querySelector('.modal-cockt__name');
 const instractions = document.querySelector('.modal-cockt__instr-text');
 const list = document.querySelector('.modal-cockt__per-list');
 const image = document.querySelector('.modal-cockt__img');
+const item = document.querySelector('.modal-cockt__card');
 
 async function getCocktailData(cocktaiId) {
   const cocktail = await fetchCocktail(cocktaiId);
 
-  renderCocktailCard(cocktail);
+  renderCocktailCard(cocktail, cocktaiId);
 }
 
 async function fetchCocktail(queryToFetch) {
@@ -59,7 +62,8 @@ async function fetchCocktail(queryToFetch) {
   }
 }
 
-function renderCocktailCard(cocktail) {
+function renderCocktailCard(cocktail, cocktaiId) {
+  item.dataset.id = `${cocktaiId}`;
   image.src = `${cocktail.strDrinkThumb}`;
   name.textContent = `${cocktail.strDrink}`;
   instractions.textContent = `${cocktail.strInstructions}`;
@@ -95,3 +99,5 @@ function renderCocktailCard(cocktail) {
   list.insertAdjacentHTML('beforeend', perList.join(''));
   markupingBtn();
 }
+
+

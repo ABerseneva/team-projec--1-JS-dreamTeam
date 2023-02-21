@@ -274,6 +274,8 @@
 
 .pagination__list {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   gap: 8;
   font-family: 'Montserrat';
@@ -348,4 +350,8 @@
   width: 17px;
   height: 15px;
   fill: var(--white-color);
+}
+
+.icon-hert-remove {
+  fill: var(--accent-color);
 }

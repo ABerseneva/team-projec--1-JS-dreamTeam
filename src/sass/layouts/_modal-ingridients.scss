@@ -10,25 +10,28 @@
     backdrop-filter: blur(5px);
     
 }
-
+.index{
+    z-index: 30;
+}
 .modal-ingrid {
+    overflow: scroll;
     z-index: 99;
     width: 320px;
-    min-height: 673px;
+    max-height: 673px;
     padding-top: 40px;
     padding-left: 15px;
     padding-right: 25px;
 
     @include tablet {
         width: 715px;
-        min-height: 557px; 
+        max-height: 557px; 
         padding-left: 28px;
         padding-right: 33px;
     }
 
     @include desktop {
         width: 715px;
-        min-height:557px;
+        max-height: 557px;
     }
 
 
@@ -144,10 +147,12 @@
     display: flex;
     align-items: center;
     justify-content: start;
+    margin-bottom: 40px;
 
     grid-area: boxbutton;
 
     @include tablet {
+        margin-bottom: 40px;
         justify-content: end;
     }
 }

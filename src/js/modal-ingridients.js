@@ -1,31 +1,35 @@
-(() => {
+import axios from 'axios';
+const box = document.querySelector('.box-ingrid');
+  
   const refs = {
-    openModalBtn: document.querySelector("[data-modal-ingrid-open]"),
     closeModalBtn: document.querySelector("[data-modal-ingrid-close]"),
     modal: document.querySelector("[data-modal-ingrid]"),
     body: document.querySelector('body'),
   };
 
-  refs.openModalBtn.addEventListener("click", toggleModal);
   refs.closeModalBtn.addEventListener("click", toggleModal);
+  refs.modal.addEventListener("click", closeModal);
 
   function toggleModal() {
     refs.modal.classList.toggle("is-hidden");
+    refs.body.classList.add('no-scroll');
+  }
+
+  function closeModal(event) {
+  if (event.target === refs.modal) {
+    refs.modal.classList.toggle("is-hidden");
     refs.body.classList.toggle('no-scroll');
   }
-})();
+}
 
-import axios from 'axios';
-
-const box = document.querySelector('.box-ingrid');
-const ingridClick = document.querySelectorAll('.modal-cockt__ingred')
-
-ingridClick.forEach((ingrid) => {
-  ingrid.addEventListener('click', async (e) => {
-    const ingridName = e.target.dataset.name;
+  document.addEventListener('click', async (e) => {
+  if (e.target.dataset.ingredient) {
+    const ingridName = e.target.dataset.ingredient;
     const ingridData = await fetchIngridient(ingridName);
     buildMarkup(ingridData);
-  });
+    toggleModal();
+  }
+  return;
 });
 
 async function fetchIngridient(queryToFetch) {
