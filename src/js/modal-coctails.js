@@ -23,7 +23,6 @@ function toggleModal() {
 }
 
 document.addEventListener('click', e => {
-  consol.log(e.target);
   if (e.target.dataset.cocktail) {
     const cocktaiId = Number(e.target.dataset.cocktail);
     getCocktailData(cocktaiId);
