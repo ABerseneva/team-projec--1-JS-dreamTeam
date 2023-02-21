@@ -35,16 +35,16 @@ function onSerch(keyWord) {
     box.innerHTML = '';
     buildMarkup(filteredCoctails);
   } else {
-    Notify.warning(
-      "Sorry, we didn't find this cocktail for you in favorite cocktails"
-    );
-    // renderErrortMarkup();
+    errorMarkup();
   }
 }
 
-function renderErrortMarkup() {
-  wrapper.style.display = 'block';
-  wrapper.innerHTML = '';
-  const startMarkup = `<p class="favorit-coct__text">Sorry, we didn't find this cocktail for you in favorite cocktails</p>`;
-  wrapper.insertAdjacentHTML('beforeend', startMarkup);
+const title = document.querySelector('.gallery__title');
+function errorMarkup() {
+  const noMatch = `<div class='noresult__container'>
+                     <p class='noresult__text'>Sorry, we didn't find this cocktail for you in favorite cocktails</p>
+                     <div class='noresult__box'></div></div>`;
+  title.classList.add('visually-hidden');
+  // paginatorList.innerHTML = '';
+  return (box.innerHTML = noMatch);
 }
