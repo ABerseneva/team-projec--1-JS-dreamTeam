@@ -1,10 +1,15 @@
 .header {
+  width: 100%;
   margin-top: 20px;
   margin-bottom: 100px;
-  // background-color: red;
+
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  // @media screen and(max-width: 480px) {
+  //   height: 65px;
+  // }
 }
 
 .header-wrap {
@@ -41,7 +46,8 @@
   margin-right: 172px;
   width: 248px;
   box-sizing: border-box;
-  background-color: var(--white-color);
+  // background-color: var(--white-color);
+  // color: var(--black-color);
 }
 
 .header-search-input {
@@ -49,10 +55,12 @@
   outline: none;
   border-radius: 0 4px 4px 0;
   background-color: var(--white-color);
+  color: var(--black-color);
   box-sizing: border-box;
-  color: Gray;
-  opacity: 0.4;
   width: 208px;
+  &::placeholder {
+    opacity: 0.4;
+  }
 }
 
 .header-search button {
@@ -72,7 +80,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: stretch;
-
+  height: 100%;
   border-radius: 4px;
 }
 
@@ -94,6 +102,7 @@
   color: var(--black-color);
 }
 .header-nav-link:hover {
+  color: var(--accent-color);
 }
 .header-nav-item:hover {
   cursor: pointer;
@@ -184,6 +193,7 @@ ul li ul:hover {
 }
 
 input:checked + .slider {
+  border: 1px solid var(--black-color);
   background-color: var(--accent-color);
 }
 
@@ -223,4 +233,81 @@ input:checked + .slider:before {
   @include font(400, 18px, 1.33, 0.02em);
   color: var(--gray-color);
   width: 43px;
+}
+
+.btn-menu-m {
+  display: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 320px) {
+  .logo {
+    width: 123.35px;
+    height: 34px;
+  }
+  .header-wrap {
+    width: 290px;
+    justify-content: space-between;
+  }
+
+  .header-nav {
+    display: none;
+  }
+  .theme-switch-wrapper {
+    display: none;
+  }
+  .header-search {
+    display: none;
+  }
+  .btn-menu-m {
+    display: block;
+  }
+}
+@media screen and (min-width: 480px) {
+  .header-wrap {
+    width: 450px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .header-wrap {
+    width: 738px;
+  }
+  .logo {
+    margin-right: 190px;
+    width: 153px;
+    height: 43px;
+  }
+  .header-search {
+    display: block;
+    width: 288px;
+    margin-right: 40px;
+  }
+  .header-search-input {
+    width: 249px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .header {
+    width: 1200px;
+  }
+  .header-wrap {
+    width: 1170px;
+  }
+  .header-nav {
+    display: block;
+  }
+  .logo {
+    margin-right: 43px;
+  }
+  .theme-switch-wrapper {
+    display: flex;
+  }
+  .header-search {
+    display: block;
+  }
+  .btn-menu-m {
+    display: none;
+  }
 }
