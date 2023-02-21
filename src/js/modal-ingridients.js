@@ -53,9 +53,9 @@ function buildMarkup(data) {
                 <h3 class="modal-ingrid__title">${name}</h3>
                 <div class="line"></div>
     
-                <p class="modal-ingrid__descrip">${description}</p>
+                <p class="modal-ingrid__descrip">${description?.replace(name, '') || 'No description'}</p>
                 <ul class="modal-ingrid__list">
-                    <li class="modal-ingrid__component"><p><span>&#10038;</span> Type: ${type}</p></li>
+                    <li class="modal-ingrid__component"><p><span>&#10038;</span> Type: ${type?.replace(name, '') || 'You already know'}</p></li>
                     <li class="modal-ingrid__component"><p><span>&#10038;</span> Country of origin: Italy</p> </li>
                     <li class="modal-ingrid__component"><p><span>&#10038;</span> Alcohol by volume: 20.5–28.5%</p> </li>
                     <li class="modal-ingrid__component"><p><span>&#10038;</span> Flavour: Bitter, spicy and sweet</p></li>
