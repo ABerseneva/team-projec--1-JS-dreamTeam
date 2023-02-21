@@ -156,3 +156,31 @@
         justify-content: end;
     }
 }
+
+#add-to-fav-ing {
+    padding: 0 20px;
+    height: 39px;
+    background-color: var(--orange-color);
+    border: none;
+
+    border-radius: 5px;
+
+    color: var(--white-color);
+
+    transition: background-color 200ms linear;
+
+    &:hover,
+    &:focus {
+        background-color: var(--accent-color);
+        outline: transparent;
+    }
+
+    @include tablet {
+
+        height: 48px;
+    }
+
+    @include desktop {
+        height: 48px;
+    }
+}
