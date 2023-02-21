@@ -94,7 +94,7 @@ function buildMarkupIng(data) {
       <h3 class='cocktail__title name modal-ingrid__name'>${name}</h3>
       <p class="ing-type">${type}</p>
       <div class='cocktail__btn--box'>
-     <button class='learnmore__btn' type='button'>Learn More</button>
+     <button class='learnmore__btn' type='button' data-ingredient='${name}'>Learn More</button>
       <button class='add__btn' type='button' data-add>Remove
      <svg class="icon-hert-remove" width="17" height="15">
      <use href="${personalheart + '#fullorrange'}"></use>
