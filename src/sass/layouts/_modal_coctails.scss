@@ -94,7 +94,7 @@
 
     display: grid;
 
-    grid-template-rows: 80px 220px 1fr 80px;
+    grid-template-rows: minmax(80px) 220px 1fr 80px;
     grid-template-columns: 280px 1fr;
 
     grid-template-areas:
@@ -111,7 +111,7 @@
 
     display: grid;
 
-    grid-template-rows: 80px 220px 1fr 80px;
+    grid-template-rows: minmax(80px) 220px 1fr 80px;
     grid-template-columns: 280px 1fr;
 
     grid-template-areas:
