@@ -9,6 +9,7 @@ const refs = {
 //   for (item of refs.openModalList) {
 //     item.addEventListener('click', toggleModal);
 //   }
+console.log(refs.modal);
 refs.modal.addEventListener('click', e => {
   if (e.target === e.currentTarget) {
     toggleModal();
