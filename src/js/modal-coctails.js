@@ -2,6 +2,7 @@
 
 const refs = {
   closeModalBtn: document.querySelector('[data-modal-cockt-close]'),
+  addRemlBtn: document.querySelector('.modal-cockt__add-rem-btn'),
   modal: document.querySelector('[data-modal-cockt]'),
   body: document.querySelector('body'),
 };
@@ -16,6 +17,7 @@ refs.modal.addEventListener('click', e => {
 });
 
 refs.closeModalBtn.addEventListener('click', toggleModal);
+refs.addRemlBtn.addEventListener('click', toggleModal);
 
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');
