@@ -9,6 +9,7 @@ const refs = {
 //   for (item of refs.openModalList) {
 //     item.addEventListener('click', toggleModal);
 //   }
+console.log(refs.modal);
 refs.modal.addEventListener('click', e => {
   if (e.target === e.currentTarget) {
     toggleModal();
@@ -34,7 +35,6 @@ document.addEventListener('click', e => {
 // ===========================================
 
 import axios from 'axios';
-import { markupingBtn } from './add-from-gallery';
 
 // const learnMoreBtn = document.querySelector('.learn-more-btn');
 const name = document.querySelector('.modal-cockt__name');
@@ -96,7 +96,25 @@ function renderCocktailCard(cocktail, cocktaiId) {
     }
   }
   list.insertAdjacentHTML('beforeend', perList.join(''));
-  markupingBtn();
+
+  markupingBtnModal();
 }
 
-
+function markupingBtnModal() {
+  const btns = document.querySelectorAll('[data-add]');
+  btns.forEach(btn => {
+    const card = btn.closest('.item');
+    const coctId = card.dataset.id;
+    const coctailList = JSON.parse(localStorage.getItem('coctailse'));
+    const numbs = coctailList.map(({ id }) => id);
+    if (numbs.some(value => value === coctId)) {
+      if (btn.dataset.modal != undefined) {
+        btn.textContent = 'Remove from favorite';
+      }
+    } else {
+      if (btn.dataset.modal != undefined) {
+        btn.textContent = 'Add to favorite';
+      }
+    }
+  });
+}
