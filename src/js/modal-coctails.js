@@ -10,15 +10,21 @@ const refs = {
 //   for (item of refs.openModalList) {
 //     item.addEventListener('click', toggleModal);
 //   }
-console.log(refs.modal);
 refs.modal.addEventListener('click', e => {
   if (e.target === e.currentTarget) {
-    toggleModal();
+    closeModal();
   }
 });
 
-refs.closeModalBtn.addEventListener('click', toggleModal);
-refs.addRemlBtn.addEventListener('click', toggleModal);
+refs.closeModalBtn.addEventListener('click', closeModal);
+refs.addRemlBtn.addEventListener('click', closeModal);
+
+function closeModal() {
+  refs.modal.classList.toggle('is-hidden');
+  if (refs.body.classList.contains('no-scroll')) {
+    refs.body.classList.remove('no-scroll');
+  }
+}
 
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');

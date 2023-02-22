@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   fetchRandomCoctails,
   fetchCocktailByName,
@@ -13,11 +12,16 @@ const paginatorList = document.querySelector('.pagination__list');
 const sectionGallery = document.querySelector('.cocktail__section');
 const form = document.querySelector('.header-search-icon');
 const title = document.querySelector('.gallery__title');
+const forwardBox = document.querySelector('.fore__wrapper');
+const backwardBox = document.querySelector('.back__wrapper');
+const meuform = document.querySelector('.menu-search-icon');
+
 
 form.addEventListener('submit', onSearch);
+meuform.addEventListener('submit', onSearch);
 
 let randomList = [];
-export let currentPage = 1;
+let currentPage = 1;
 export let perPage = 0;
 let totalPages = 0;
 perPage = pagesMediaCheck();
@@ -43,10 +47,9 @@ export async function onClick(e) {
 
 async function onSearch(e) {
   e.preventDefault();
-  currentPage = 1;
   paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
-  const searchValue = e.target.elements.searchQuery.value;
+  const searchValue = e.target.elements.searchQuery.value.trim().toLowerCase();
 
   box.innerHTML = '';
   const requestedData = await fetchCocktailByName(searchValue);
@@ -59,6 +62,7 @@ async function onSearch(e) {
     buildGallery(requestedData);
   }
   form.reset();
+  meuform.reset();
 }
 
 async function renderRandomCocktails() {
@@ -72,39 +76,49 @@ renderRandomCocktails();
 
 function buildGallery(searchValue) {
   paginatorList.innerHTML = '';
+  backwardBox.innerHTML = '';
+  forwardBox.innerHTML = '';
   paginator.classList.remove('visually-hidden');
-  let totalPages = Math.ceil(searchValue.length / perPage);
+  currentPage = 1;
 
+  totalPages = Math.ceil(searchValue.length / perPage);
+
+  createBackArrowMarkup();
+  createForeArrowMarkup();
   const forward = document.querySelector('.forward');
   const backward = document.querySelector('.backward');
-  backward.disabled = true;
-  backward.classList.add('move__btn-disabled');
 
-  backward.addEventListener('click', () => {
+  if (currentPage === 1) {
+    backward.disabled = true;
+    forward.disabled = false;
+  }
+
+  backward.addEventListener('click', moveBack);
+  function moveBack() {
     currentPage--;
+
     paginatorList.innerHTML = '';
     renderCocktails(searchValue, perPage, currentPage);
     displayPagination();
     forward.disabled = false;
-    forward.classList.remove('move__btn-disabled');
+
     if (currentPage === 1) {
       backward.disabled = true;
-      backward.classList.add('move__btn-disabled');
     }
-  });
+  }
 
-  forward.addEventListener('click', () => {
+  forward.addEventListener('click', moveFore);
+  function moveFore() {
     currentPage++;
     paginatorList.innerHTML = '';
     renderCocktails(searchValue, perPage, currentPage);
     displayPagination();
     backward.disabled = false;
-    backward.classList.remove('move__btn-disabled');
+
     if (currentPage === totalPages) {
       forward.disabled = true;
-      forward.classList.add('move__btn-disabled');
     }
-  });
+  }
 
   function displayPagination() {
     for (let i = 0; i < totalPages; i++) {
@@ -126,18 +140,14 @@ function buildGallery(searchValue) {
       currentPage = number;
       renderCocktails(searchValue, perPage, currentPage);
       backward.disabled = true;
-      backward.classList.add('move__btn-disabled');
       forward.disabled = true;
-      forward.classList.add('move__btn-disabled');
 
       if (currentPage !== 1) {
         backward.disabled = false;
-        backward.classList.remove('move__btn-disabled');
       }
 
       if (currentPage !== totalPages) {
         forward.disabled = false;
-        forward.classList.remove('move__btn-disabled');
       }
 
       let currentActive = document.querySelector('li.pagination__item--active');
@@ -149,30 +159,6 @@ function buildGallery(searchValue) {
   }
 
   displayPagination();
-}
-
-function superCheck() {
-  if (currentPage === totalPages) {
-    forward.disable = true;
-    forward.classList.add('move__btn-disabled');
-  }
-  if (currentPage === 1) {
-    backward.disable = true;
-    backward.classList.add('move__btn-disabled');
-  }
-}
-
-function arrowBtnControl() {
-  const backward = document.querySelector('.backward');
-  const forward = document.querySelector('.forward');
-  backward.addEventListener('click', () => {
-    currentPage--;
-    return renderCocktails(searchValue, perPage, currentPage);
-  });
-  forward.addEventListener('click', () => {
-    currentPage++;
-    return renderCocktails(searchValue, perPage, currentPage);
-  });
 }
 
 function pagesMediaCheck() {
@@ -214,7 +200,7 @@ function buildMarkup(data) {
   markupingBtn();
 }
 
-function renderCocktails(cocktailList, perPage, page) {
+export function renderCocktails(cocktailList, perPage, page) {
   page--;
   box.innerHTML = '';
 
@@ -231,4 +217,22 @@ function errorMarkup() {
   title.classList.add('visually-hidden');
   paginatorList.innerHTML = '';
   return (box.innerHTML = noMatch);
+}
+
+function createBackArrowMarkup() {
+  const markupBack = `<button class="backward" type="button">
+        <svg class="arrow__back" width="8" height="13">
+          <use href='${personalheart + '#icon-arrow-left'}'></use>
+        </svg>
+      </button>`;
+  return backwardBox.insertAdjacentHTML('afterbegin', markupBack);
+}
+function createForeArrowMarkup() {
+  const markupFore = `<button class="forward" type="button">
+      <svg class="arrow__fore" width="8" height="13">
+        <use href="${personalheart + '#icon-arrow-right-black'}"></use>
+      </svg>
+    </button>`;
+
+  return forwardBox.insertAdjacentHTML('beforeend', markupFore);
 }

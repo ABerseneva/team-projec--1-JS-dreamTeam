@@ -1,10 +1,10 @@
-import { buildMarkup } from './render-favor-coctail';
+import { buildMarkupIng } from './rend-fav-ing';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const form = document.querySelector('.header-search-icon');
 const wrapper = document.querySelector('.favorit-coct__wrapper');
 const box = document.querySelector('.cocktail__list');
-const coctailList = JSON.parse(localStorage.getItem('coctailse'));
+const ingList = JSON.parse(localStorage.getItem('ingridients'));
 let keyWord = '';
 
 form.addEventListener('submit', handSubmit);
@@ -23,17 +23,17 @@ function handSubmit(event) {
 }
 
 function onSerch(keyWord) {
-  const names = coctailList.map(({ name }) => name.toLowerCase());
+  const names = ingList.map(({ name }) => name.toLowerCase());
   console.log(names);
 
   if (names.some(value => value === keyWord || value.includes(keyWord))) {
-    const filteredCoctails = coctailList.filter(
+    const filteredCoctails = ingList.filter(
       ({ name }) =>
         name.toLowerCase() === keyWord || name.toLowerCase().includes(keyWord)
     );
     // console.log(filteredCoctails);
     box.innerHTML = '';
-    buildMarkup(filteredCoctails);
+    buildMarkupIng(filteredCoctails);
   } else {
     wrapper.innerHTML = '';
     wrapper.style.display = 'none';
@@ -44,7 +44,7 @@ function onSerch(keyWord) {
 const title = document.querySelector('.gallery__title');
 function errorMarkup() {
   const noMatch = `<div class='noresult__container'>
-                     <p class='noresult__text'>Sorry, we didn't find this cocktail for you in favorite cocktails</p>
+                     <p class='noresult__text'>Sorry, we didn't find this ingridient for you in favorite ingridients</p>
                      <div class='noresult__box'></div></div>`;
   title.classList.add('visually-hidden');
   // paginatorList.innerHTML = '';

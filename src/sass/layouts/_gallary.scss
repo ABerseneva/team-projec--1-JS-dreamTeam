@@ -32,7 +32,11 @@
   }
 
   @include desktop {
-    font-size: 32px;
+    font-family: 'Poppins';
+
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.5;
   }
 }
 
@@ -320,15 +324,6 @@
   background-color: var(--orange-color);
 }
 
-.icon-hert {
-  background-image: url('../images/heart.svg');
-}
-
-.arrow__back,
-.arrow__fore {
-  fill: var(--orange-color);
-}
-
 .backward,
 .forward {
   width: 60px;
@@ -342,10 +337,6 @@
   }
 }
 
-.move__btn-disabled {
-  fill: #eaebea;
-}
-
 .icon-hert {
   width: 17px;
   height: 15px;
@@ -354,4 +345,14 @@
 
 .icon-hert-remove {
   fill: var(--accent-color);
+}
+
+.backward,
+.forward {
+  fill: var(--orange-color);
+}
+
+.backward:disabled,
+.forward:disabled {
+  fill: #eaebea;
 }
