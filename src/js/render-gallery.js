@@ -14,8 +14,11 @@ const form = document.querySelector('.header-search-icon');
 const title = document.querySelector('.gallery__title');
 const forwardBox = document.querySelector('.fore__wrapper');
 const backwardBox = document.querySelector('.back__wrapper');
+const meuform = document.querySelector('.menu-search-icon');
+
 
 form.addEventListener('submit', onSearch);
+meuform.addEventListener('submit', onSearch);
 
 let randomList = [];
 let currentPage = 1;
@@ -59,6 +62,7 @@ async function onSearch(e) {
     buildGallery(requestedData);
   }
   form.reset();
+  meuform.reset();
 }
 
 async function renderRandomCocktails() {
