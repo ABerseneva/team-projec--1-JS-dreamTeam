@@ -49,13 +49,15 @@ function buildMarkup(data) {
     strType: type,
     strDescription: description,
   } = data;
+
   const markup = `<h2 class="modal-ingrid__name">${name}</h2>
-                <h3 class="modal-ingrid__title">${name}</h3>
+                <h3 class="modal-ingrid__title">${type?.replace(name, '') || 'liquid'}</h3>
                 <div class="line"></div>
     
-                <p class="modal-ingrid__descrip">${
+                <p class="modal-ingrid__descrip"><span class='accent__text'>${name} </span> ${
                   description?.replace(name, '') || 'No description'
                 }</p>
+
                 <ul class="modal-ingrid__list">
                     <li class="modal-ingrid__component"><p><span>&#10038;</span> Type: ${
                       type?.replace(name, '') || 'You already know'

@@ -13,8 +13,13 @@
 .index{
     z-index: 30;
 }
+
 .modal-ingrid {
     overflow: scroll;
+    overflow-x: hidden; 
+
+    
+
     z-index: 99;
     width: 320px;
     max-height: 673px;
@@ -43,6 +48,18 @@
     left: 50%;
     transform: translate(-50%, -50%) scaleY(1);
     transition: rtansform 200ms linear;
+}
+
+.modal-ingrid::-webkit-scrollbar {
+    width: 3px;
+}
+
+.modal-ingrid::-webkit-scrollbar-track {
+    background-color: var(--black-color);
+}
+
+.modal-ingrid::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
 }
 
 .modal-ingrid__close {
@@ -74,6 +91,7 @@
 
 .modal-ingrid__name {
     margin-bottom: 20px;
+    color: var(--black-color);
 
     @include tablet{
         margin-bottom: 28px;
@@ -85,8 +103,14 @@
     line-height: calc(38/32);
 }
 
+.accent__text{
+    color: var(--black-color);
+    font-weight: bold;
+}
+
 .modal-ingrid__title{
     margin-bottom: 20px;
+    color: var(--black-color);
 
     @include tablet {
         margin-bottom: 68px;
