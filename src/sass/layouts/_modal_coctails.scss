@@ -54,8 +54,11 @@
 
 
 .modal-cockt__card {
+  overflow: scroll;
+  overflow-x: hidden; 
 
 position: absolute;
+
 
   top: 0%;
   left: 50%;
@@ -85,6 +88,7 @@ position: absolute;
     'boxbutton';
 
   @include tablet {
+    max-height: 700px;
     top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -104,6 +108,7 @@ position: absolute;
   }
 
   @include desktop {
+    max-height: 700px;
     top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -124,6 +129,19 @@ position: absolute;
       'boxbutton boxbutton';
   }
 }
+
+.modal-cockt__card::-webkit-scrollbar {
+  width: 3px;
+}
+
+.modal-cockt__card::-webkit-scrollbar-track {
+  background-color: var(--black-color);
+}
+
+.modal-cockt__card::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+}
+
 
 .modal-cockt__img-tumb {
   grid-area: imgtumb;
