@@ -18,14 +18,14 @@ function handSubmit(event) {
   // }
   keyWord = inputValue;
   //   page = 1;
-  console.log(keyWord);
+  // console.log(keyWord);
   onSerch(keyWord);
   // form.searchQuery.value = '';
 }
 
 function onSerch(keyWord) {
   const names = coctailList.map(({ name }) => name.toLowerCase());
-  console.log(names);
+  // console.log(names);
 
   if (names.some(value => value === keyWord || value.includes(keyWord))) {
     const filteredCoctails = coctailList.filter(
