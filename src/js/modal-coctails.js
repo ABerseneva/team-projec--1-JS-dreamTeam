@@ -78,7 +78,7 @@ function renderCocktailCard(cocktail, cocktaiId) {
   list.innerHTML = '';
   for (let i = 1; i < 15; i++) {
     if (cocktail[`strMeasure${i}`] || cocktail[`strIngredient${i}`]) {
-      if (!cocktail[`strMeasure${i}`]) {
+      if (!cocktail[`strMeasure${i}`] || (cocktail[`strMeasure${i}`] === "\n")) {
         perList.push(
           `<li class="modal-cockt__ingred">
           <a>
