@@ -104,7 +104,3 @@ export function buildMarkupIng(data) {
       </li>`;
   });
   box.insertAdjacentHTML('beforeend', markup.join(''));}
-
-const body =document.querySelector("body")
-const background = document.querySelector(".ing-type")
-
