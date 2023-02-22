@@ -12,8 +12,8 @@ const paginatorList = document.querySelector('.pagination__list');
 const sectionGallery = document.querySelector('.cocktail__section');
 const form = document.querySelector('.header-search-icon');
 const title = document.querySelector('.gallery__title');
-const forward = document.querySelector('.forward');
-const backward = document.querySelector('.backward');
+const forwardBox = document.querySelector('.fore__wrapper');
+const backwardBox = document.querySelector('.back__wrapper');
 
 form.addEventListener('submit', onSearch);
 
@@ -72,17 +72,22 @@ renderRandomCocktails();
 
 function buildGallery(searchValue) {
   paginatorList.innerHTML = '';
+  backwardBox.innerHTML = '';
+  forwardBox.innerHTML = '';
   paginator.classList.remove('visually-hidden');
   currentPage = 1;
 
   totalPages = Math.ceil(searchValue.length / perPage);
 
+  createBackArrowMarkup();
+  createForeArrowMarkup();
+  const forward = document.querySelector('.forward');
+  const backward = document.querySelector('.backward');
+
   if (currentPage === 1) {
     backward.disabled = true;
     forward.disabled = false;
   }
-  forward.removeEventListener('click', moveFore);
-  backward.removeEventListener('click', moveBack);
 
   backward.addEventListener('click', moveBack);
   function moveBack() {
@@ -208,4 +213,22 @@ function errorMarkup() {
   title.classList.add('visually-hidden');
   paginatorList.innerHTML = '';
   return (box.innerHTML = noMatch);
+}
+
+function createBackArrowMarkup() {
+  const markupBack = `<button class="backward" type="button">
+        <svg class="arrow__back" width="8" height="13">
+          <use href='${personalheart + '#icon-arrow-left'}'></use>
+        </svg>
+      </button>`;
+  return backwardBox.insertAdjacentHTML('afterbegin', markupBack);
+}
+function createForeArrowMarkup() {
+  const markupFore = `<button class="forward" type="button">
+      <svg class="arrow__fore" width="8" height="13">
+        <use href="${personalheart + '#icon-arrow-right-black'}"></use>
+      </svg>
+    </button>`;
+
+  return forwardBox.insertAdjacentHTML('beforeend', markupFore);
 }
