@@ -9,4 +9,5 @@ import './js/rend-fav-ing';
 import './js/color-switch';
 import './js/fetch';
 import './js/local-storage-ingredients';
+import './js/fav-ing-search'
 // import './js/fav-coct-search';
