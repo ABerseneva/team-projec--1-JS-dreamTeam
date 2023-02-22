@@ -51,22 +51,18 @@
 
 }
 
+
+
 .modal-cockt__card {
-  position: absolute;
 
-  top: 50%;
+position: absolute;
+
+  top: 0%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
 
-
-  background-color: var(--white-color);
 
   transition-property: scale;
-
-}
-
-
-.modal-cockt__card {
 
   background-color: var(--white-color);
 
@@ -78,7 +74,7 @@
 
   display: grid;
 
-  grid-template-rows: 40px auto 280px auto 50px;
+  grid-template-rows: auto auto 280px auto 50px;
   grid-template-columns: 280px;
 
   grid-template-areas:
@@ -89,6 +85,9 @@
     'boxbutton';
 
   @include tablet {
+    top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     width: 820px;
     padding: 0px;
 
@@ -105,6 +104,10 @@
   }
 
   @include desktop {
+    top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
     width: 820px;
     padding: 0px;
 
@@ -282,6 +285,11 @@
 
 .modal-cockt__ingred a {
 cursor: pointer;
+
+&:hover,
+&:focus {
+color: var(--accent-color);
+}
 
 }
 

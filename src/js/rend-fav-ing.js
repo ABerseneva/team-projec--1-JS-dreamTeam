@@ -21,7 +21,6 @@
 // const makeMarkup = `<div id="test-div" class="test-div"><h2 class="name-ing">${resulPars.hone}</h2>
 // <p class="what-ing">${resulPars.htwo}</p><p><button type="button" id="learnBtn" class="learn-btn">Learn more</button><button type="button" id="remove" class="remove-btn">Remove</button></div>`;
 
-
 import personalheart from '../images/personalheart.svg';
 
 const box = document.querySelector('.cocktail__list');
@@ -31,7 +30,7 @@ const sectionGallery = document.querySelector('.cocktail__section');
 const ingList = JSON.parse(localStorage.getItem('ingridients'));
 const wrapper = document.querySelector('.favorit-coct__wrapper');
 const ingridients = [];
-console.log(wrapper);
+// console.log(wrapper);
 
 let currentPage = 1;
 let perPage = 0;
@@ -64,14 +63,15 @@ if (localStorage.getItem('ingridients') !== '[]') {
 
 document.addEventListener('click', event => {
   if (event.target.dataset.add != undefined) {
+    console.log('hello');
     const ingList = JSON.parse(localStorage.getItem('ingridients'));
-     const card = event.target.closest('.modal-ingrid');
-      const ingName = card.querySelector('.modal-ingrid__name').textContent;
-      console.log(ingName);
+    const card = event.target.closest('.ing-item');
+    const ingName = card.querySelector('.ing-name').textContent;
+    console.log(ingName);
     const names = ingList.map(({ name }) => name);
-      if(names.some(value => value === ingName)) {
-    const removeIng = ingList.filter(({ name }) => name !== ingName)
-    localStorage.setItem('ingridients', JSON.stringify(removeIng));
+    if (names.some(value => value === ingName)) {
+      const removeIng = ingList.filter(({ name }) => name !== ingName);
+      localStorage.setItem('ingridients', JSON.stringify(removeIng));
       box.innerHTML = '';
       buildMarkupIng(removeIng);
 
@@ -84,12 +84,12 @@ document.addEventListener('click', event => {
 
 function renderStartMarkup() {
   wrapper.style.display = 'block';
-  const startMarkup = `<p class="favorit-coct__text">You haven't added any favorite cocktails yet</p>`;
+  const startMarkup = `<p class="favorit-coct__text ing-text">You haven't added any <br> favorite ingridients yet</p>`;
   wrapper.insertAdjacentHTML('beforeend', startMarkup);
 }
 
 export function buildMarkupIng(data) {
-  const markup = data.map(({name, type }) => {
+  const markup = data.map(({ name, type }) => {
     return `   <li class='cocktail__item item ing-item'>
       <h3 class='cocktail__title name modal-ingrid__name ing-name'>${name}</h3>
       <p class="ing-type">${type}</p>
@@ -104,3 +104,4 @@ export function buildMarkupIng(data) {
       </li>`;
   });
   box.insertAdjacentHTML('beforeend', markup.join(''));}
+
