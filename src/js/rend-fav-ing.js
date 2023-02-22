@@ -103,5 +103,5 @@ export function buildMarkupIng(data) {
       </div>
       </li>`;
   });
-  box.insertAdjacentHTML('beforeend', markup.join(''));
-}
+  box.insertAdjacentHTML('beforeend', markup.join(''));}
+
