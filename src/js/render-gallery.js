@@ -47,7 +47,7 @@ async function onSearch(e) {
   currentPage = 1;
   paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
-  const searchValue = e.target.elements.searchQuery.value;
+  const searchValue = e.target.elements.searchQuery.value.trim().toLowerCase();
 
   box.innerHTML = '';
   const requestedData = await fetchCocktailByName(searchValue);
@@ -74,6 +74,7 @@ renderRandomCocktails();
 function buildGallery(searchValue) {
   paginatorList.innerHTML = '';
   paginator.classList.remove('visually-hidden');
+  currentPage = 1;
 
   totalPages = Math.ceil(searchValue.length / perPage);
 
@@ -86,7 +87,9 @@ function buildGallery(searchValue) {
 
   backward.addEventListener('click', moveBack);
   function moveBack() {
-    currentPage--;
+    console.log(currentPage);
+    currentPage = currentPage - 1;
+    console.log(currentPage);
     paginatorList.innerHTML = '';
     renderCocktails(searchValue, perPage, currentPage);
     displayPagination();
