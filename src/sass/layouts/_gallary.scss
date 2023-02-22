@@ -309,6 +309,11 @@
   border: 1px solid #eaebea;
   border-radius: 4px;
 
+  &:hover {
+    color: var(--accent-color);
+    box-shadow: 0px 0px 14px 7px rgba(199, 103, 48, 0.81);
+  }
+
   @include tablet {
     width: 40px;
     height: 40px;
@@ -322,6 +327,9 @@
 .pagination__item--active {
   color: var(--white-color);
   background-color: var(--orange-color);
+  &:hover {
+    color: var(--white-color);
+  }
 }
 
 .backward,
@@ -350,9 +358,22 @@
 .backward,
 .forward {
   fill: var(--orange-color);
+
+  &:hover {
+    fill: var(--accent-color);
+  }
+
+  @include tablet {
+    &:hover {
+      box-shadow: 0px 0px 14px 7px rgba(199, 103, 48, 0.81);
+    }
+  }
 }
 
 .backward:disabled,
 .forward:disabled {
   fill: #eaebea;
+  &:hover {
+    box-shadow: none;
+  }
 }
