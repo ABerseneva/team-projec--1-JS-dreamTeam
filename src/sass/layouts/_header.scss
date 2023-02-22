@@ -5,7 +5,7 @@
   padding-top: 20px;
       padding-bottom: 20px;
       background-color: var(--white-color);
-      z-index: 100;
+      z-index: 20;
       position: sticky;
       top: 0;
 
@@ -162,7 +162,7 @@ ul li ul:hover {
   opacity: 1;
   display: block;
   background-color: var(--white-color);
-  z-index: 100;
+  z-index: 20;
 }
 
 /* The switch - the box around the slider */
