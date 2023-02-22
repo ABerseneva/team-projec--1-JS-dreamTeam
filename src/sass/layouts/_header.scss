@@ -528,7 +528,14 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   gap: 8px;
+  fill: var(--black-color);
 }
+
+.menu-item-wrap:hover,.menu-item-wrap:focus{
+  color: var(--accent-color);
+  fill: var(--accent-color);
+}
+
 .menu-dropdown:hover {
   visibility: visible;
   opacity: 1;
@@ -537,7 +544,7 @@ input:checked + .slider:before {
 
 .header-nav-item:hover {
   cursor: pointer;
-.header-dropdown {
+.menu-dropdown {
   visibility: hidden;
   opacity: 0;
   position: absolute;
