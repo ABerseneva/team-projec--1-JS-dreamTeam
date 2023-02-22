@@ -38,3 +38,16 @@
                 font-family: Poppins;
                 font-weight: 400
 }
+.ing-item {
+@include tablet {
+    height: auto;
+}
+}
+
+.ing-section {
+    padding-bottom: 60px;
+}
+
+.ing-name {
+    padding-top: 30px;
+}

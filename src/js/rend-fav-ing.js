@@ -90,8 +90,8 @@ function renderStartMarkup() {
 
 export function buildMarkupIng(data) {
   const markup = data.map(({name, type }) => {
-    return `   <li class='cocktail__item item'>
-      <h3 class='cocktail__title name modal-ingrid__name'>${name}</h3>
+    return `   <li class='cocktail__item item ing-item'>
+      <h3 class='cocktail__title name modal-ingrid__name ing-name'>${name}</h3>
       <p class="ing-type">${type}</p>
       <div class='cocktail__btn--box'>
      <button class='learnmore__btn' type='button' data-ingredient='${name}'>Learn More</button>
