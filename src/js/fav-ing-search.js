@@ -1,5 +1,6 @@
 import { buildMarkupIng } from './rend-fav-ing';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import throttle from 'lodash.throttle';
 
 const form = document.querySelector('.header-search-icon');
 const wrapper = document.querySelector('.favorit-coct__wrapper');
@@ -7,24 +8,24 @@ const box = document.querySelector('.cocktail__list');
 const ingList = JSON.parse(localStorage.getItem('ingridients'));
 let keyWord = '';
 
-form.addEventListener('submit', handSubmit);
+form.addEventListener('input', throttle(handSubmit, 500));
 function handSubmit(event) {
   event.preventDefault();
   const inputValue = form.searchQuery.value.trim().toLowerCase();
-  if (!inputValue || keyWord === inputValue) {
-    form.searchQuery.value = '';
-    return;
-  }
+  // if (!inputValue || keyWord === inputValue) {
+  //   form.searchQuery.value = '';
+  //   return;
+  // }
   keyWord = inputValue;
   //   page = 1;
-  console.log(keyWord);
+  // console.log(keyWord);
   onSerch(keyWord);
-  form.searchQuery.value = '';
+  // form.searchQuery.value = '';
 }
 
 function onSerch(keyWord) {
   const names = ingList.map(({ name }) => name.toLowerCase());
-  console.log(names);
+  // console.log(names);
 
   if (names.some(value => value === keyWord || value.includes(keyWord))) {
     const filteredCoctails = ingList.filter(
