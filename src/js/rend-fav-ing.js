@@ -88,7 +88,7 @@ function renderStartMarkup() {
   wrapper.insertAdjacentHTML('beforeend', startMarkup);
 }
 
-function buildMarkupIng(data) {
+export function buildMarkupIng(data) {
   const markup = data.map(({ name, type }) => {
     return `   <li class='cocktail__item item ing-item'>
       <h3 class='cocktail__title name modal-ingrid__name ing-name'>${name}</h3>
