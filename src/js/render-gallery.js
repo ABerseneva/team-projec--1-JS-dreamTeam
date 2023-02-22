@@ -44,7 +44,6 @@ export async function onClick(e) {
 
 async function onSearch(e) {
   e.preventDefault();
-  currentPage = 1;
   paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
   const searchValue = e.target.elements.searchQuery.value.trim().toLowerCase();
@@ -87,9 +86,8 @@ function buildGallery(searchValue) {
 
   backward.addEventListener('click', moveBack);
   function moveBack() {
-    console.log(currentPage);
-    currentPage = currentPage - 1;
-    console.log(currentPage);
+    currentPage--;
+
     paginatorList.innerHTML = '';
     renderCocktails(searchValue, perPage, currentPage);
     displayPagination();
