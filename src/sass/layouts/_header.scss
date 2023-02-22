@@ -1,7 +1,13 @@
 .header {
   width: 100%;
-  margin-top: 20px;
+  // margin-top: 20px;
   margin-bottom: 100px;
+  padding-top: 20px;
+      padding-bottom: 20px;
+      background-color: var(--white-color);
+      z-index: 20;
+      position: sticky;
+      top: 0;
 
   @include tablet {}
   
@@ -10,6 +16,7 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
+      
     }
 }
 
@@ -154,6 +161,8 @@ ul li ul:hover {
   visibility: visible;
   opacity: 1;
   display: block;
+  background-color: var(--white-color);
+  z-index: 20;
 }
 
 /* The switch - the box around the slider */

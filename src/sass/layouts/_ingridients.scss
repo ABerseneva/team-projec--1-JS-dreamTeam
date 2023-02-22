@@ -23,18 +23,26 @@
 // }
 
 .ing-title {
-    padding-top: 70px;
+    
     margin-bottom: 60px;
 }
 
-.ing-text {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 450px;
-    font-size: 32px;
-        line-height: 2.25;
-            text-align: center;
-                color: var(--black-color);
-                font-family: Poppins;
-                font-weight: 400
+.ing-type {
+
+    color: var(--black-color);
+
+}
+.ing-item {
+@include tablet {
+    height: auto;
+}
+}
+
+.ing-section {
+    padding-bottom: 60px;
+    padding-top: 70px;
+}
+
+.ing-name {
+    padding-top: 30px;
 }
