@@ -1,4 +1,3 @@
-
 import { buildMarkupIng } from './rend-fav-ing';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -32,10 +31,12 @@ function onSerch(keyWord) {
       ({ name }) =>
         name.toLowerCase() === keyWord || name.toLowerCase().includes(keyWord)
     );
-    console.log(filteredCoctails);
+    // console.log(filteredCoctails);
     box.innerHTML = '';
     buildMarkupIng(filteredCoctails);
   } else {
+    wrapper.innerHTML = '';
+    wrapper.style.display = 'none';
     errorMarkup();
   }
 }

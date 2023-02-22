@@ -31,10 +31,12 @@ function onSerch(keyWord) {
       ({ name }) =>
         name.toLowerCase() === keyWord || name.toLowerCase().includes(keyWord)
     );
-    console.log(filteredCoctails);
+    // console.log(filteredCoctails);
     box.innerHTML = '';
     buildMarkup(filteredCoctails);
   } else {
+    wrapper.innerHTML = '';
+    wrapper.style.display = 'none';
     errorMarkup();
   }
 }
