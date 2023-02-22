@@ -4,10 +4,12 @@
   @include tablet {
     padding-top: 0;
     padding-bottom: 50px;
+    margin-top: 60px;
   }
 
   @include desktop {
     padding-bottom: 50px;
+    margin-top: 98px;
   }
 }
 
