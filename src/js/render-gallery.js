@@ -5,6 +5,7 @@ import {
 } from './fetch';
 import { markupingBtn } from './add-from-gallery';
 import personalheart from '../images/personalheart.svg';
+import { handlePagination } from './pagination';
 
 const box = document.querySelector('.cocktail__list');
 const paginator = document.querySelector('.paginator');
@@ -23,7 +24,6 @@ meuform.addEventListener('submit', onSearch);
 let randomList = [];
 let currentPage = 1;
 export let perPage = 0;
-let totalPages = 0;
 perPage = pagesMediaCheck();
 
 export async function onClick(e) {
@@ -83,82 +83,7 @@ function buildGallery(searchValue) {
 
   totalPages = Math.ceil(searchValue.length / perPage);
 
-  createBackArrowMarkup();
-  createForeArrowMarkup();
-  const forward = document.querySelector('.forward');
-  const backward = document.querySelector('.backward');
-
-  if (currentPage === 1) {
-    backward.disabled = true;
-    forward.disabled = false;
-  }
-
-  backward.addEventListener('click', moveBack);
-  function moveBack() {
-    currentPage--;
-
-    paginatorList.innerHTML = '';
-    renderCocktails(searchValue, perPage, currentPage);
-    displayPagination();
-    forward.disabled = false;
-
-    if (currentPage === 1) {
-      backward.disabled = true;
-    }
-  }
-
-  forward.addEventListener('click', moveFore);
-  function moveFore() {
-    currentPage++;
-    paginatorList.innerHTML = '';
-    renderCocktails(searchValue, perPage, currentPage);
-    displayPagination();
-    backward.disabled = false;
-
-    if (currentPage === totalPages) {
-      forward.disabled = true;
-    }
-  }
-
-  function displayPagination() {
-    for (let i = 0; i < totalPages; i++) {
-      const cocktailItem = displayPaginationBtn(i + 1);
-      paginatorList.append(cocktailItem);
-    }
-  }
-
-  function displayPaginationBtn(number) {
-    const cocktailItem = document.createElement('li');
-    cocktailItem.classList.add('pagination__item');
-    cocktailItem.textContent = number;
-
-    if (currentPage === number) {
-      cocktailItem.classList.add('pagination__item--active');
-    }
-
-    cocktailItem.addEventListener('click', () => {
-      currentPage = number;
-      renderCocktails(searchValue, perPage, currentPage);
-      backward.disabled = true;
-      forward.disabled = true;
-
-      if (currentPage !== 1) {
-        backward.disabled = false;
-      }
-
-      if (currentPage !== totalPages) {
-        forward.disabled = false;
-      }
-
-      let currentActive = document.querySelector('li.pagination__item--active');
-      currentActive.classList.remove('pagination__item--active');
-
-      cocktailItem.classList.add('pagination__item--active');
-    });
-    return cocktailItem;
-  }
-
-  displayPagination();
+  handlePagination(searchValue, totalPages, currentPage);
 }
 
 function pagesMediaCheck() {
@@ -217,22 +142,4 @@ function errorMarkup() {
   title.classList.add('visually-hidden');
   paginatorList.innerHTML = '';
   return (box.innerHTML = noMatch);
-}
-
-function createBackArrowMarkup() {
-  const markupBack = `<button class="backward" type="button">
-        <svg class="arrow__back" width="8" height="13">
-          <use href='${personalheart + '#icon-arrow-left'}'></use>
-        </svg>
-      </button>`;
-  return backwardBox.insertAdjacentHTML('afterbegin', markupBack);
-}
-function createForeArrowMarkup() {
-  const markupFore = `<button class="forward" type="button">
-      <svg class="arrow__fore" width="8" height="13">
-        <use href="${personalheart + '#icon-arrow-right-black'}"></use>
-      </svg>
-    </button>`;
-
-  return forwardBox.insertAdjacentHTML('beforeend', markupFore);
 }
