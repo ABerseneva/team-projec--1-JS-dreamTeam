@@ -15,6 +15,7 @@ const form = document.querySelector('.header-search-icon');
 const title = document.querySelector('.gallery__title');
 const forwardBox = document.querySelector('.fore__wrapper');
 const backwardBox = document.querySelector('.back__wrapper');
+const lettersList = document.querySelector('.hero__list');
 
 const meuform = document.querySelector('.menu-search-icon');
 
@@ -31,36 +32,52 @@ export async function onClick(e) {
   currentPage = 1;
   paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
+
   const searchValue = e.target.dataset.letter;
+
+  removeActiveLetter();
+  e.target.classList.add('letter-active');
 
   box.innerHTML = '';
   const requestedData = await fetchCocktailByLetter(searchValue);
+
   if (requestedData === null) {
-    return errorMarkup();
+    errorMarkup();
+    box.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    return;
   }
 
   renderCocktails(requestedData, perPage, currentPage);
   if (requestedData.length > perPage) {
     buildGallery(requestedData);
   }
+  title.scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
 
 async function onSearch(e) {
   e.preventDefault();
   paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
+
   const searchValue = e.target.elements.searchQuery.value.trim().toLowerCase();
 
+  removeActiveLetter();
   box.innerHTML = '';
+
   const requestedData = await fetchCocktailByName(searchValue);
+
   if (requestedData === null) {
-    return errorMarkup();
+    errorMarkup();
+    box.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    return;
   }
 
   renderCocktails(requestedData, perPage, currentPage);
   if (requestedData.length > perPage) {
     buildGallery(requestedData);
   }
+
+  title.scrollIntoView({ block: 'start', behavior: 'smooth' });
   form.reset();
   meuform.reset();
 }
@@ -125,6 +142,16 @@ function buildMarkup(data) {
   markupingBtn();
 }
 
+function paginationFilter(cocktailList, perPage, page) {
+  page--;
+  box.innerHTML = '';
+
+  const begin = perPage * page;
+  const end = begin + perPage;
+  const paginatedData = cocktailList.slice(begin, end);
+  return paginatedData;
+}
+
 export function renderCocktails(cocktailList, perPage, page) {
   page--;
   box.innerHTML = '';
@@ -142,4 +169,12 @@ function errorMarkup() {
   title.classList.add('visually-hidden');
   paginatorList.innerHTML = '';
   return (box.innerHTML = noMatch);
+}
+
+function removeActiveLetter() {
+  Array.from(lettersList.children).forEach(letter => {
+    if (letter.classList.contains('letter-active')) {
+      letter.classList.remove('letter-active');
+    }
+  });
 }

@@ -4,7 +4,7 @@ import './js/favorite-list';
 import './js/mobile-menu';
 import './js/modal-coctails';
 import './js/modal-ingridients';
-import './js/pagination';
+// import './js/pagination';
 import './js/render-favor-coctail';
 import './js/color-switch';
 import './js/fetch';

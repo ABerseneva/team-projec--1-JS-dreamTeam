@@ -24,8 +24,7 @@ function checkActive(liElems, currentPage) {
 
 export function handlePagination(searchResult, totalPages, currentPage) {
   createPaginationMarkup(totalPages);
-  createBackArrowMarkup();
-  createForeArrowMarkup();
+  createArrowsMarkup();
 
   const forward = document.querySelector('.forward');
   const backward = document.querySelector('.backward');
@@ -102,20 +101,29 @@ function createPaginationMarkup(totalCount) {
   paginatorList.insertAdjacentHTML('beforeend', pagBtn.join(''));
 }
 
-function createBackArrowMarkup() {
+function createArrowsMarkup() {
   const markupBack = `<button class="backward" type="button">
         <svg class="arrow__back" width="8" height="13">
           <use href='${personalheart + '#icon-arrow-left'}'></use>
         </svg>
       </button>`;
-  return backwardBox.insertAdjacentHTML('afterbegin', markupBack);
-}
-function createForeArrowMarkup() {
+
   const markupFore = `<button class="forward" type="button">
       <svg class="arrow__fore" width="8" height="13">
         <use href="${personalheart + '#icon-arrow-right-black'}"></use>
       </svg>
     </button>`;
 
-  return forwardBox.insertAdjacentHTML('beforeend', markupFore);
+  forwardBox.insertAdjacentHTML('beforeend', markupFore);
+  backwardBox.insertAdjacentHTML('afterbegin', markupBack);
+}
+
+function paginationFilter(cocktailList, perPage, page) {
+  page--;
+  box.innerHTML = '';
+
+  const begin = perPage * page;
+  const end = begin + perPage;
+  const paginatedData = cocktailList.slice(begin, end);
+  return paginatedData;
 }
