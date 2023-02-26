@@ -1,13 +1,10 @@
 import personalheart from '../images/personalheart.svg';
 
-// const addBtn = document.querySelectorAll('.add__btn');
 const coctailse = [];
 
 if (!localStorage.getItem('coctailse')) {
   localStorage.setItem('coctailse', JSON.stringify(coctailse));
 }
-
-// const coctailList = JSON.parse(localStorage.getItem('coctailse'));
 
 document.addEventListener('click', event => {
   if (event.target.dataset.add != undefined) {
@@ -41,31 +38,6 @@ document.addEventListener('click', event => {
     }
   }
 });
-
-// function changeToAdd(event) {
-//   const tekst = event.target.textContent === 'Remove from favorite';
-//   if (tekst) {
-//     event.target.textContent = 'Add to favorite';
-//   } else {
-//     event.target.innerHTML = `Add to
-//    <svg class="icon-hert" width="17" height="15">
-//      <use href="${personalheart + '#icon-black'}"></use>
-//    </svg>`;
-//   }
-// }
-
-// function changeToRemove(event) {
-//   const tekst = event.target.textContent === 'Add to favorite';
-
-//   if (tekst) {
-//     event.target.textContent = 'Remove from favorite';
-//   } else {
-//     event.target.innerHTML = `Remove
-//      <svg class="icon-hert" width="19" height="17">
-//             <use href="./symbol-defs.a8b2e413.svg#icon-heart-transparent"></use>
-//     </svg>`;
-//   }
-// }
 
 export function markupingBtn() {
   const btns = document.querySelectorAll('[data-add]');

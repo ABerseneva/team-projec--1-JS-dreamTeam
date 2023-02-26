@@ -50,13 +50,15 @@ function buildMarkup(data) {
     strDescription: description,
   } = data;
 
-  const markup = `<h2 class="modal-ingrid__name">${name}</h2>
-                <h3 class="modal-ingrid__title">${type?.replace(name, '') || 'liquid'}</h3>
+  const markup = `<h2 class="modal-ingrid__name" data-name>${name}</h2>
+                <h3 class="modal-ingrid__title">${
+                  type?.replace(name, '') || 'liquid'
+                }</h3>
                 <div class="line"></div>
     
                 <p class="modal-ingrid__descrip"><span class='accent__text'>${name} </span> ${
-                  description?.replace(name, '') || 'No description'
-                }</p>
+    description?.replace(name, '') || 'No description'
+  }</p>
 
                 <ul class="modal-ingrid__list">
                     <li class="modal-ingrid__component"><p><span>&#10038;</span> Type: ${
@@ -76,7 +78,7 @@ function markupingBtnModalIng() {
     const ingList = JSON.parse(localStorage.getItem('ingridients'));
     const card = btn.closest('.modal-ingrid');
     const ingName = card.querySelector('.modal-ingrid__name').textContent;
-    console.log(ingName);
+    // console.log(ingName);
     const names = ingList.map(({ name }) => name);
     if (names.some(value => value === ingName)) {
       if (btn.dataset.ing != undefined) {
