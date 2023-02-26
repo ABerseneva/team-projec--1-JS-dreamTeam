@@ -21,8 +21,6 @@ function addToLocalStorage(event) {
   const ingName = card.querySelector('.modal-ingrid__name').textContent;
   const ingType = card.querySelector('.modal-ingrid__title').textContent;
   const ingList = JSON.parse(localStorage.getItem('ingridients'));
-  console.log(ingName);
-  console.log(ingList);
   const names = ingList.map(({ name }) => name);
 
   if (
@@ -48,8 +46,6 @@ export function markupingBtnIng() {
   btns.forEach(btn => {
     const card = btn.closest('.modal-ingrid');
     const ingName = card.querySelector('.modal-ingrid__name').textContent;
-    // const card = btn.closest('.item');
-    // const coctId = card.dataset.id;
     const ingList = JSON.parse(localStorage.getItem('ingridients'));
     const names = ingList.map(({ name }) => name);
     if (names.some(value => value === ingName)) {

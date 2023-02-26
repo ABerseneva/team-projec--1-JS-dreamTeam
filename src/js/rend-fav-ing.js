@@ -27,10 +27,9 @@ const box = document.querySelector('.cocktail__list');
 // const paginator = document.querySelector('.paginator');
 // const paginatorList = document.querySelector('.pagination__list');
 // const sectionGallery = document.querySelector('.cocktail__section');
-const ingList = JSON.parse(localStorage.getItem('ingridients'));
+
 const wrapper = document.querySelector('.favorit-coct__wrapper');
 const ingridients = [];
-// console.log(wrapper);
 
 let currentPage = 1;
 let perPage = 0;
@@ -54,6 +53,7 @@ if (!localStorage.getItem('ingridients')) {
   localStorage.setItem('ingridients', JSON.stringify(ingridients));
 }
 
+const ingList = JSON.parse(localStorage.getItem('ingridients'));
 if (localStorage.getItem('ingridients') !== '[]') {
   wrapper.innerHTML = '';
   wrapper.style.display = 'none';
@@ -62,22 +62,23 @@ if (localStorage.getItem('ingridients') !== '[]') {
 }
 
 document.addEventListener('click', event => {
-  if (event.target.dataset.add != undefined) {
-    console.log('hello');
+  if (event.target.dataset.adding != undefined) {
     const ingList = JSON.parse(localStorage.getItem('ingridients'));
-    const card = event.target.closest('.ing-item');
-    const ingName = card.querySelector('.ing-name').textContent;
-    console.log(ingName);
     const names = ingList.map(({ name }) => name);
+    const card = event.target.closest('[data-card]');
+    const ingName = card.querySelector('[data-name]').textContent;
+
     if (names.some(value => value === ingName)) {
       const removeIng = ingList.filter(({ name }) => name !== ingName);
       localStorage.setItem('ingridients', JSON.stringify(removeIng));
       box.innerHTML = '';
       buildMarkupIng(removeIng);
-
-      if (localStorage.getItem('ingridients') === '[]') {
-        renderStartMarkup();
-      }
+    } else {
+      box.innerHTML = '';
+      buildMarkupIng(ingList);
+    }
+    if (localStorage.getItem('ingridients') === '[]') {
+      renderStartMarkup();
     }
   }
 });
@@ -90,12 +91,12 @@ function renderStartMarkup() {
 
 export function buildMarkupIng(data) {
   const markup = data.map(({ name, type }) => {
-    return `   <li class='cocktail__item item ing-item'>
-      <h3 class='cocktail__title name modal-ingrid__name ing-name'>${name}</h3>
+    return `   <li class='cocktail__item item ing-item' data-card>
+      <h3 class='cocktail__title name modal-ingrid__name ing-name' data-name>${name}</h3>
       <p class="ing-type">${type}</p>
       <div class='cocktail__btn--box'>
      <button class='learnmore__btn' type='button' data-ingredient='${name}'>Learn More</button>
-      <button class='add__btn' type='button' data-add>Remove
+      <button class='add__btn' type='button' data-addIng>Remove
      <svg class="icon-hert-remove" width="17" height="15">
      <use href="${personalheart + '#fullorrange'}"></use>
    </svg>
