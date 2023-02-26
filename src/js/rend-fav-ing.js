@@ -24,9 +24,9 @@
 import personalheart from '../images/personalheart.svg';
 
 const box = document.querySelector('.cocktail__list');
-const paginator = document.querySelector('.paginator');
-const paginatorList = document.querySelector('.pagination__list');
-const sectionGallery = document.querySelector('.cocktail__section');
+// const paginator = document.querySelector('.paginator');
+// const paginatorList = document.querySelector('.pagination__list');
+// const sectionGallery = document.querySelector('.cocktail__section');
 const ingList = JSON.parse(localStorage.getItem('ingridients'));
 const wrapper = document.querySelector('.favorit-coct__wrapper');
 const ingridients = [];
@@ -103,5 +103,5 @@ export function buildMarkupIng(data) {
       </div>
       </li>`;
   });
-  box.insertAdjacentHTML('beforeend', markup.join(''));}
-
+  box.insertAdjacentHTML('beforeend', markup.join(''));
+}

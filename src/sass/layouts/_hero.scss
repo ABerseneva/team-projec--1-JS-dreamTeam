@@ -130,6 +130,11 @@
   }
 }
 
+.letter-active {
+  transform: scale(2);
+  color: var(--accent-color);
+}
+
 .hero__text {
   display: none;
   font-family: 'Poppins', sans-serif;

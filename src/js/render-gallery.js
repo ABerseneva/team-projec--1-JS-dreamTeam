@@ -5,6 +5,7 @@ import {
 } from './fetch';
 import { markupingBtn } from './add-from-gallery';
 import personalheart from '../images/personalheart.svg';
+import { handlePagination } from './pagination';
 
 const box = document.querySelector('.cocktail__list');
 const paginator = document.querySelector('.paginator');
@@ -14,6 +15,7 @@ const form = document.querySelector('.header-search-icon');
 const title = document.querySelector('.gallery__title');
 const forwardBox = document.querySelector('.fore__wrapper');
 const backwardBox = document.querySelector('.back__wrapper');
+const lettersList = document.querySelector('.hero__list');
 
 const meuform = document.querySelector('.menu-search-icon');
 
@@ -23,7 +25,6 @@ meuform.addEventListener('submit', onSearch);
 let randomList = [];
 let currentPage = 1;
 export let perPage = 0;
-let totalPages = 0;
 perPage = pagesMediaCheck();
 
 export async function onClick(e) {
@@ -31,36 +32,52 @@ export async function onClick(e) {
   currentPage = 1;
   paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
+
   const searchValue = e.target.dataset.letter;
+
+  removeActiveLetter();
+  e.target.classList.add('letter-active');
 
   box.innerHTML = '';
   const requestedData = await fetchCocktailByLetter(searchValue);
+
   if (requestedData === null) {
-    return errorMarkup();
+    errorMarkup();
+    box.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    return;
   }
 
   renderCocktails(requestedData, perPage, currentPage);
   if (requestedData.length > perPage) {
     buildGallery(requestedData);
   }
+  title.scrollIntoView({ block: 'start', behavior: 'smooth' });
 }
 
 async function onSearch(e) {
   e.preventDefault();
   paginator.classList.add('visually-hidden');
   title.classList.remove('visually-hidden');
+
   const searchValue = e.target.elements.searchQuery.value.trim().toLowerCase();
 
+  removeActiveLetter();
   box.innerHTML = '';
+
   const requestedData = await fetchCocktailByName(searchValue);
+
   if (requestedData === null) {
-    return errorMarkup();
+    errorMarkup();
+    box.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    return;
   }
 
   renderCocktails(requestedData, perPage, currentPage);
   if (requestedData.length > perPage) {
     buildGallery(requestedData);
   }
+
+  title.scrollIntoView({ block: 'start', behavior: 'smooth' });
   form.reset();
   meuform.reset();
 }
@@ -83,82 +100,7 @@ function buildGallery(searchValue) {
 
   totalPages = Math.ceil(searchValue.length / perPage);
 
-  createBackArrowMarkup();
-  createForeArrowMarkup();
-  const forward = document.querySelector('.forward');
-  const backward = document.querySelector('.backward');
-
-  if (currentPage === 1) {
-    backward.disabled = true;
-    forward.disabled = false;
-  }
-
-  backward.addEventListener('click', moveBack);
-  function moveBack() {
-    currentPage--;
-
-    paginatorList.innerHTML = '';
-    renderCocktails(searchValue, perPage, currentPage);
-    displayPagination();
-    forward.disabled = false;
-
-    if (currentPage === 1) {
-      backward.disabled = true;
-    }
-  }
-
-  forward.addEventListener('click', moveFore);
-  function moveFore() {
-    currentPage++;
-    paginatorList.innerHTML = '';
-    renderCocktails(searchValue, perPage, currentPage);
-    displayPagination();
-    backward.disabled = false;
-
-    if (currentPage === totalPages) {
-      forward.disabled = true;
-    }
-  }
-
-  function displayPagination() {
-    for (let i = 0; i < totalPages; i++) {
-      const cocktailItem = displayPaginationBtn(i + 1);
-      paginatorList.append(cocktailItem);
-    }
-  }
-
-  function displayPaginationBtn(number) {
-    const cocktailItem = document.createElement('li');
-    cocktailItem.classList.add('pagination__item');
-    cocktailItem.textContent = number;
-
-    if (currentPage === number) {
-      cocktailItem.classList.add('pagination__item--active');
-    }
-
-    cocktailItem.addEventListener('click', () => {
-      currentPage = number;
-      renderCocktails(searchValue, perPage, currentPage);
-      backward.disabled = true;
-      forward.disabled = true;
-
-      if (currentPage !== 1) {
-        backward.disabled = false;
-      }
-
-      if (currentPage !== totalPages) {
-        forward.disabled = false;
-      }
-
-      let currentActive = document.querySelector('li.pagination__item--active');
-      currentActive.classList.remove('pagination__item--active');
-
-      cocktailItem.classList.add('pagination__item--active');
-    });
-    return cocktailItem;
-  }
-
-  displayPagination();
+  handlePagination(searchValue, totalPages, currentPage);
 }
 
 function pagesMediaCheck() {
@@ -200,6 +142,16 @@ function buildMarkup(data) {
   markupingBtn();
 }
 
+function paginationFilter(cocktailList, perPage, page) {
+  page--;
+  box.innerHTML = '';
+
+  const begin = perPage * page;
+  const end = begin + perPage;
+  const paginatedData = cocktailList.slice(begin, end);
+  return paginatedData;
+}
+
 export function renderCocktails(cocktailList, perPage, page) {
   page--;
   box.innerHTML = '';
@@ -219,20 +171,10 @@ function errorMarkup() {
   return (box.innerHTML = noMatch);
 }
 
-function createBackArrowMarkup() {
-  const markupBack = `<button class="backward" type="button">
-        <svg class="arrow__back" width="8" height="13">
-          <use href='${personalheart + '#icon-arrow-left'}'></use>
-        </svg>
-      </button>`;
-  return backwardBox.insertAdjacentHTML('afterbegin', markupBack);
-}
-function createForeArrowMarkup() {
-  const markupFore = `<button class="forward" type="button">
-      <svg class="arrow__fore" width="8" height="13">
-        <use href="${personalheart + '#icon-arrow-right-black'}"></use>
-      </svg>
-    </button>`;
-
-  return forwardBox.insertAdjacentHTML('beforeend', markupFore);
+function removeActiveLetter() {
+  Array.from(lettersList.children).forEach(letter => {
+    if (letter.classList.contains('letter-active')) {
+      letter.classList.remove('letter-active');
+    }
+  });
 }
